@@ -1,0 +1,43 @@
+-- local map = vim.api.nvim_set_keymap
+-- local opts = { noremap = true, silent = true }
+--
+-- -- Move to previous/next
+-- map('n', '<A-Right>', '<Cmd>BufferLineCycleNext<CR>', opts)
+-- map('n', '<A-Left>', '<Cmd>BufferLineCyclePrev<CR>', opts)
+--
+-- -- Re-order to previous/next
+-- map('n', '<A-,>', '<Cmd>BufferLineMovePrev<CR>', opts)
+-- map('n', '<A-.>', '<Cmd>BufferLineMoveNext<CR>', opts)
+-- -- Goto buffer in position...
+-- map('n', '<leader>1', '<Cmd>BufferLineGoToBuffer 1<CR>', opts)
+-- map('n', '<leader>2', '<Cmd>BufferLineGoToBuffer 2<CR>', opts)
+-- map('n', '<leader>3', '<Cmd>BufferLineGoToBuffer 3<CR>', opts)
+-- map('n', '<leader>4', '<Cmd>BufferLineGoToBuffer 4<CR>', opts)
+-- map('n', '<leader>5', '<Cmd>BufferLineGoToBuffer 5<CR>', opts)
+-- map('n', '<leader>6', '<Cmd>BufferLineGoToBuffer 6<CR>', opts)
+-- map('n', '<leader>7', '<Cmd>BufferLineGoToBuffer 7<CR>', opts)
+-- map('n', '<leader>8', '<Cmd>BufferLineGoToBuffer 8<CR>', opts)
+-- map('n', '<leader>9', '<Cmd>BufferLineGoToBuffer 9<CR>', opts)
+-- map('n', '<leader>0', '<Cmd>BufferLineGoToBuffer -1<CR>', opts)
+--
+-- -- Pin/unpin buffer
+-- map('n', '<A-p>', '<Cmd>BufferLineTogglePin<CR>', opts)
+-- -- Close buffer
+-- map('n', '<A-c>', '<Cmd>BufferLinePickClose<CR>', opts)
+--
+-- -- Close commands
+-- map('n', '<leader>cll', '<Cmd>BufferLineCloseLeft<CR>', opts)
+-- map('n', '<leader>clr', '<Cmd>BufferLineCloseRight<CR>', opts)
+--
+-- require('bufferline').setup{
+--     options = {
+--         offsets = {
+--             {
+--                     filetype = "neo-tree",
+--                     text = "Neo-tree",
+--                     text_align = "left",
+--                     highlight = "Directory",
+--             }
+--         },
+--     }
+-- }
