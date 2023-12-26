@@ -47,7 +47,7 @@ test -s ~/.alias && . ~/.alias || true
 
 
 alias vim="nvim"
-export DOTFILE = "$HOME/Documents/dotfiles"
+export DOTFILE="$HOME/Documents/dotfiles"
 alias overwatch='lutris lutris:rungame/overwatch-2'
 
 alias nuget='mono ~/nuget.exe'
