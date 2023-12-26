@@ -1,15 +1,15 @@
 #!/bin/sh
 
-removePathAndLink() {
-    rm -rf ~/.config/$1
+movePathAndLink() {
+    mv ~/.config/$1 ~/.config/$1.bckp
     ln -s $(pwd)/$1 ~/.config/$1
 }
 
 moveShell() {
-    rm -rf ~/.zshrc
+    mv ~/.zshrc ~/.zshrc.bckp
     ln -s $(pwd)/zsh/.zshrc ~/.zshrc
 
-    rm -rf ~/.profile
+    mv ~/.profile ~/.profile.bckp
     ln -s $(pwd)/zsh/.profile ~/.profile
 }
 
@@ -21,10 +21,10 @@ else
     exit 1
 fi
 
-removePathAndLink nvim
-removePathAndLink hypr
-removePathAndLink waybar
-removePathAndLink kitty
+movePathAndLink nvim
+movePathAndLink hypr
+movePathAndLink waybar
+movePathAndLink kitty
 
 
 moveShell
