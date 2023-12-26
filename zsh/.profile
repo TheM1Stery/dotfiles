@@ -47,7 +47,7 @@ test -s ~/.alias && . ~/.alias || true
 
 
 alias vim="nvim"
-export NEOCONFPATH="$HOME/Documents/init.lua"
+export DOTFILE = "$HOME/Documents/dotfiles"
 alias overwatch='lutris lutris:rungame/overwatch-2'
 
 alias nuget='mono ~/nuget.exe'

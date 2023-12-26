@@ -21,6 +21,25 @@ else
     exit 1
 fi
 
+echo "This will move your current dotfiles to .bckp and create a symlink to the dotfiles in this directory"
+
+
+shopt -s nocasematch
+status=true
+while $status; do
+    echo -n "Do you want to install the dotfiles? (y/n) "
+    read -r answer
+    if [[ "$answer" == "y" ]]; then
+        echo "Installing dotfiles"
+        status=false
+    elif [[ "$answer" == "n" ]]; then
+        echo "Aborting"
+        exit 1
+    else
+        echo "Please answer with y or n"
+    fi
+done
+
 movePathAndLink nvim
 movePathAndLink hypr
 movePathAndLink waybar
@@ -29,5 +48,5 @@ movePathAndLink kitty
 
 moveShell
 
-
+echo "Done"
 
