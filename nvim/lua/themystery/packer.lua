@@ -180,4 +180,12 @@ return require('packer').startup(function(use)
         branch = "harpoon2",
         requires = { { "nvim-lua/plenary.nvim" } }
     }
+
+    use ({
+        'ggandor/leap.nvim',
+        requires = { 'tpope/vim-repeat' },
+        config = function ()
+            require('leap').create_default_mappings()
+        end
+    })
 end)
