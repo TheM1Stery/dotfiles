@@ -1,0 +1,89 @@
+"" Source your .vimrc
+"source ~/.vimrc
+let mapleader = " "
+
+""editor config
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=8
+" Do incremental searching.
+set incsearch
+set relativenumber
+set number
+
+""plugins
+Plug 'preservim/nerdtree'
+Plug 'machakann/vim-highlightedyank'
+set sneak
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+
+
+
+""Jetbrains actions mapping
+map <leader>dc <Action>(QuickJavaDoc)
+map <leader>fc <Action>(ReformatCode)
+""if csharpier plugin and csharpier itself is installed you can use this for formatting
+""map <leader>fc <Action>(com.intellij.csharpier.ReformatWithCSharpierAction)
+map <leader>gd <Action>(GotoDeclaration)
+map <leader>ed <Action>(ShowErrorDescription)
+map <leader>bd <Action>(BuildWholeSolutionAction)
+map <leader>ru <Action>(Run)
+map <leader>de <Action>(Debug)
+map <leader>tb <Action>(ToggleLineBreakpoint)
+map <leader>qi <Action>(QuickImplementations)
+map <leader>pf <Action>(GotoFile)
+map <leader>ps <Action>(TextSearchAction)
+map <leader>cj <Action>(HideActiveWindow)
+map <leader>pe <Action>(SearchEverywhere)
+
+
+
+""csharp specific actions
+map <leader>emm <Action>(EfCore.Features.Migrations.AddMigrationAction)
+map <leader>emr <Action>(EfCore.Features.Database.RemoveMigrationAction)
+map <leader>edu <Action>(EfCore.Features.Database.UpdateDatabaseAction)
+
+""convenient remaps
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+nnoremap <C-u> <C-u>zz
+nnoremap <C-d> <C-d>zz
+"" copy to system clipboard
+nnoremap <leader>y \"+y
+vnoremap <leader>y \"+y
+nnoremap <leader>Y \"+Y
+nnoremap <leader>dd \"_d
+
+
+""tab remap
+nnoremap <leader>1 1gt
+nnoremap <leader>2 2gt
+nnoremap <leader>3 3gt
+nnoremap <leader>4 4gt
+nnoremap <leader>5 5gt
+nnoremap <leader>6 6gt
+nnoremap <leader>7 7gt
+nnoremap <leader>8 8gt
+nnoremap <leader>9 9gt
+nnoremap <leader>q :q<CR>
+
+""nerdtree remaps
+nnoremap <leader>ft :NERDTreeFocus<CR>
+nnoremap <leader>tt :NERDTreeToggle<CR>
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+
+
+" Find more examples here: https://jb.gg/share-ideavimrc
