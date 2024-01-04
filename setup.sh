@@ -1,8 +1,13 @@
 #!/bin/sh
 
-movePathAndLink() {
+moveAndLink() {
     mv ~/.config/$1 ~/.config/$1.bckp
     ln -s $(pwd)/$1 ~/.config/$1
+}
+
+moveHomeAndLink(){
+    mv ~/$1 ~/$1.bckp
+    ln -s $(pwd)/$1 ~/$1
 }
 
 moveShell() {
@@ -40,10 +45,12 @@ while $status; do
     fi
 done
 
-movePathAndLink nvim
-movePathAndLink hypr
-movePathAndLink waybar
-movePathAndLink kitty
+moveAndLink nvim
+moveAndLink hypr
+moveAndLink waybar
+moveAndLink kitty
+
+moveHomeAndLink .ideavimrc
 
 
 moveShell

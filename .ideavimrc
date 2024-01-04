@@ -37,15 +37,23 @@ map <leader>tb <Action>(ToggleLineBreakpoint)
 map <leader>qi <Action>(QuickImplementations)
 map <leader>pf <Action>(GotoFile)
 map <leader>ps <Action>(TextSearchAction)
-map <leader>cj <Action>(HideActiveWindow)
+map <leader>hw <Action>(HideActiveWindow)
+map <leader>hwa <Action>(HideAllWindows)
+map <leader>sw <Action>(JumpToLastWindow)
 map <leader>pe <Action>(SearchEverywhere)
 
 
 
-""csharp specific actions
+""dotnet specific actions
 map <leader>emm <Action>(EfCore.Features.Migrations.AddMigrationAction)
 map <leader>emr <Action>(EfCore.Features.Database.RemoveMigrationAction)
 map <leader>edu <Action>(EfCore.Features.Database.UpdateDatabaseAction)
+
+map <leader>dnc <Action>(Rider.Web.DotNetUserSecrets)
+
+map <leader>dng <Action>(ActivateNuGetToolWindow)
+
+
 
 ""convenient remaps
 nnoremap <A-j> :m .+1<CR>==
