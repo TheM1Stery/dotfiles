@@ -16,9 +16,20 @@ return {
             vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
         end
     },
-    "lewis6991/gitsigns.nvim",
-    "windwp/nvim-ts-autotag",
-    "windwp/nvim-autopairs",
+    {
+        "lewis6991/gitsigns.nvim",
+        opts = {}
+    },
+    {
+        "windwp/nvim-ts-autotag",
+        event = "InsertEnter",
+        opts = {}
+    },
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        opts = {}
+    },
     {
         "kosayoda/nvim-lightbulb",
         opts = {
@@ -27,7 +38,15 @@ return {
     },
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     "mfussenegger/nvim-dap",
-    "folke/neodev.nvim",
+    {
+        "folke/neodev.nvim",
+        dependencies = { "rcarriga/nvim-dap-ui" },
+        config = function()
+            require("neodev").setup({
+                library = { plugins = { "nvim-dap-ui" }, types = true }
+            })
+        end
+    },
     {
         "ionide/Ionide-vim",
         event = "VimEnter"
@@ -41,27 +60,4 @@ return {
     },
     "SmiteshP/nvim-navic",
     "Decodetalkers/csharpls-extended-lsp.nvim",
-    {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v3.x',
-        dependencies = {
-            -- LSP Support
-            'neovim/nvim-lspconfig',
-            'williamboman/mason.nvim',
-            'williamboman/mason-lspconfig.nvim',
-
-            -- Autocompletion
-            'hrsh7th/nvim-cmp',
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-path',
-            'saadparwaiz1/cmp_luasnip',
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-nvim-lua',
-
-            -- Snippets
-            'L3MON4D3/LuaSnip',
-            'rafamadriz/friendly-snippets',
-        }
-    }
-
 }
