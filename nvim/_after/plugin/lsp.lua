@@ -9,12 +9,12 @@ local lsp = require("lsp-zero")
 
 
 
--- use csharp_ls language server("https://github.com/razzmatazz/csharp-language-server")
--- i'm using this instead of Mason because the version of it is old in Mason,
--- the version here is maintained by dotnet tool and it's the latest
--- lsp.configure('csharp_ls', {
---     force_setup = true
--- })
+lsp.configure('csharp_ls', {
+    handlers = {
+        ["textDocument/definition"] = require("csharpls_extended").handler,
+        ["textDocument/typeDefinition"] = require("csharpls_extended").handler
+    }
+})
 
 lsp.configure('clangd', {
     cmd = { 'clangd', '--offset-encoding=utf-16' },

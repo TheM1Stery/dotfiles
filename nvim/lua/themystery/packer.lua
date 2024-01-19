@@ -12,21 +12,9 @@ return require('packer').startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
-    -- use({
-    --  'rose-pine/neovim',
-    --  as = 'rose-pine',
-    --  config = function()
-    --   vim.cmd('colorscheme rose-pine')
-    --  end
-    -- })
-
     use 'numToStr/Comment.nvim'
 
-    -- use 'navarasu/onedark.nvim'
     use "olimorris/onedarkpro.nvim"
-
-
-    -- use 'folke/tokyonight.nvim'
 
     use({
         "folke/trouble.nvim",
@@ -78,12 +66,6 @@ return require('packer').startup(function(use)
 
     use("eandrju/cellular-automaton.nvim")
     use("laytan/cloak.nvim")
-    -- use {
-    --     'nvim-tree/nvim-tree.lua',
-    --     requires = {
-    --         'nvim-tree/nvim-web-devicons', -- optional
-    --     },
-    -- }
 
     use {
         "nvim-neo-tree/neo-tree.nvim",
@@ -114,11 +96,6 @@ return require('packer').startup(function(use)
 
     use 'andweeb/presence.nvim'
 
-    -- use {'romgrk/barbar.nvim', requires = {
-    --   'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
-    --   'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
-    -- }
-    -- }
 
     use {
         'glepnir/dashboard-nvim',
@@ -153,8 +130,6 @@ return require('packer').startup(function(use)
         end,
     })
 
-    use { 'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons' }
-
     use { 'kosayoda/nvim-lightbulb' }
 
     use "lukas-reineke/indent-blankline.nvim"
@@ -188,4 +163,6 @@ return require('packer').startup(function(use)
             require('leap').create_default_mappings()
         end
     })
+
+    use {"Decodetalkers/csharpls-extended-lsp.nvim"}
 end)

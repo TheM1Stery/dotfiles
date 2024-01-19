@@ -11,6 +11,7 @@ require("cloak").setup({
           ".env*",
           "wrangler.toml",
           ".dev.vars",
+          "*.env*"
       },
       -- Match an equals sign and any character after it.
       -- This can also be a table of patterns to cloak,
