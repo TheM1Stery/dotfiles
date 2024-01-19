@@ -1,5 +1,7 @@
 return {
     "olimorris/onedarkpro.nvim",
+    dependencies = { "lukas-reineke/indent-blankline.nvim" },
+    priority = 1000,
     config = function()
         require("onedarkpro").setup({
             options = {
