@@ -1,6 +1,7 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+        dependencies = { "HiPhish/rainbow-delimiters.nvim" },
         config = function()
             require 'nvim-treesitter.configs'.setup {
                 -- A list of parser names, or "all"
@@ -27,6 +28,7 @@ return {
                     enable = true,
                 }
             }
+            require('rainbow-delimiters.setup').setup()
         end
     },
     "nvim-treesitter/nvim-treesitter-context"

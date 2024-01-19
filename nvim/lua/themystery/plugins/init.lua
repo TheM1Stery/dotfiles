@@ -36,7 +36,13 @@ return {
             autocmd = { enabled = true }
         }
     },
-    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        config = function()
+            require("ibl").setup()
+        end
+    },
     "mfussenegger/nvim-dap",
     {
         "folke/neodev.nvim",
@@ -60,4 +66,5 @@ return {
     },
     "SmiteshP/nvim-navic",
     "Decodetalkers/csharpls-extended-lsp.nvim",
+    "HiPhish/rainbow-delimiters.nvim",
 }
