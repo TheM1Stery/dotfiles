@@ -18,5 +18,18 @@ return {
 
         -- dapui keymaps
         vim.keymap.set("n", "<leader>dui", "<cmd>lua require'dapui'.toggle()<CR>")
+
+
+        -- configure adapters
+
+        -- c/c++ debugger
+        local dap = require("dap")
+        dap.adapters.cppdbg = {
+            id = "cppdbg",
+            type="executable",
+            command = vim.fn.stdpath("data") .. "/mason/bin/OpenDebugAD7"
+        }
+
+
     end
 }
