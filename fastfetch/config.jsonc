@@ -4,6 +4,9 @@
         "source": "opensuse_tumbleweed_small",
         "color": {
             "1": "green"
+        },
+        "padding": {
+            "top": 2
         }
     },
     "display": {
