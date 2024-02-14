@@ -12,7 +12,7 @@
     "display": {
         "separator": "  ",
         "color": {
-            "keys": "magenta"
+            "keys": "green"
         },
         "size": {
             "ndigits": 0,
@@ -40,28 +40,33 @@
         },
         {
             "type": "memory",
-            "key": "├─"
+            "key": "├─"
+        },
+        {
+            "type": "cpu",
+            "key": "├─",
+            "temp": true
+        },
+        {
+            "type": "gpu",
+            "key": "├─G",
+            "temp": true
         },
         {
             "type": "packages",
             "key": "├─"
         },
         {
-            "type": "uptime",
-            "key": "├─"
-        },
-        {
             "type": "wm",
             "key": "├─"
         },
-        // {
-        //     "type": "custom",
-        //     "key": "╰─",
-        //     "format": "\u001b[31m███\u001b[32m███\u001b[33m███\u001b[34m███\u001b[35m███\u001b[36m███"
-        // }
         {
             "type": "media",
-            "key": "╰─"
+            "key": "├─"
+        },
+        {
+            "type": "uptime",
+            "key": "╰─"
         }
     ]
 }
