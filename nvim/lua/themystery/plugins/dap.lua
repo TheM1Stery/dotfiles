@@ -24,10 +24,28 @@ return {
 
         -- c/c++ debugger
         local dap = require("dap")
-        dap.adapters.cppdbg = {
-            id = "cppdbg",
-            type="executable",
-            command = vim.fn.stdpath("data") .. "/mason/bin/OpenDebugAD7"
+        dap.adapters.codelldb = {
+            type = "server",
+            port = "${port}",
+            executable = {
+                command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
+                args = {"--port", "${port}"}
+            }
+        }
+
+        dap.configurations.rust = {
+            {
+                name = "Rust Debug",
+                type = "codelldb",
+                request = "launch",
+                program = function()
+                    vim.fn.jobstart("cargo build");
+                    return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug", "file")
+                end,
+                cwd = "${workspaceFolder}",
+                stopOnEntry = true,
+                showDisassembly = false,
+            }
         }
 
 
