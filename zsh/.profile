@@ -69,6 +69,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 export SUDO_EDITOR="nvim"
+export EDITOR="nvim"
 mkcdir ()
 {
     mkdir -p -- "$1" &&
@@ -164,3 +165,4 @@ alias rm="rm -i"
 alias hyprexec="hyprctl dispatch exec"
 alias tgwaybar="killall -SIGUSR1 waybar"
 alias rwaybar="killall -SIGUSR2 waybar"
+alias ls="lsd"
