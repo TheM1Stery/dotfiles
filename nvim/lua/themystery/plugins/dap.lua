@@ -44,7 +44,7 @@ return {
                 end,
                 cwd = "${workspaceFolder}",
                 stopOnEntry = true,
-                showDisassembly = false,
+                showDisassembly = "never"
             }
         }
 
