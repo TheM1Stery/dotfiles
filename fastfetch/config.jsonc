@@ -32,7 +32,7 @@
         {
             "type": "os",
             "key": "╭─",
-            "format": "{2} {8}"
+            "format": "{2} {9}"
         },
         {
             "type": "kernel",
