@@ -51,6 +51,17 @@ return {
             }
         })
 
+        lsp.configure("rust_analyzer", {
+            settings = {
+                ["rust-analyzer"] = {
+                    checkOnSave = true,
+                    check = {
+                        command = "clippy"
+                    }
+                }
+            }
+        })
+
         lsp.set_server_config({
             capabilities = {
                 textDocument = {
