@@ -51,7 +51,7 @@ vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>")
 vim.keymap.set("n", "<leader>bda", "<cmd>:%bd|e#<CR>")
 
 
-vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so")
-end)
+-- vim.keymap.set("n", "<leader><leader>", function()
+--     vim.cmd("so")
+-- end)
 
