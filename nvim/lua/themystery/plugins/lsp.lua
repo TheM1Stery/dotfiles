@@ -22,6 +22,9 @@ return {
         -- extras
         "SmiteshP/nvim-navic",
         "Decodetalkers/csharpls-extended-lsp.nvim",
+
+        -- rust
+        'mrcjkb/rustaceanvim'
     },
     config = function()
         local lsp = require("lsp-zero")
@@ -50,17 +53,17 @@ return {
                 }
             }
         })
-
-        lsp.configure("rust_analyzer", {
-            settings = {
-                ["rust-analyzer"] = {
-                    checkOnSave = true,
-                    check = {
-                        command = "clippy"
-                    }
-                }
-            }
-        })
+        --
+        -- lsp.configure("rust_analyzer", {
+        --     settings = {
+        --         ["rust-analyzer"] = {
+        --             checkOnSave = true,
+        --             check = {
+        --                 command = "clippy"
+        --             }
+        --         }
+        --     }
+        -- })
 
         lsp.set_server_config({
             capabilities = {
@@ -80,7 +83,7 @@ return {
 
         require('luasnip.loaders.from_vscode').lazy_load()
 
-        vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
+        vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
         cmp.setup({
             formatting = cmp_format,
@@ -92,16 +95,16 @@ return {
                 documentation = cmp.config.window.bordered(),
             },
             sources = {
-                {name = 'path'},
-                {name = 'nvim_lsp'},
-                {name = 'nvim_lua'},
-                {name = 'buffer', keyword_length = 3},
-                {name = 'luasnip', keyword_length = 2},
+                { name = 'path' },
+                { name = 'nvim_lsp' },
+                { name = 'nvim_lua' },
+                { name = 'buffer',  keyword_length = 3 },
+                { name = 'luasnip', keyword_length = 2 },
             },
             mapping = cmp.mapping.preset.insert({
                 -- confirm completion item
-                ['<CR>'] = cmp.mapping.confirm({select = false, behavior = cmp.ConfirmBehavior.Insert}),
-                ['<Tab>'] = cmp.mapping.confirm({select = false, behavior = cmp.ConfirmBehavior.Replace}),
+                ['<CR>'] = cmp.mapping.confirm({ select = false, behavior = cmp.ConfirmBehavior.Insert }),
+                ['<Tab>'] = cmp.mapping.confirm({ select = false, behavior = cmp.ConfirmBehavior.Replace }),
 
                 -- toggle completion menu
                 ['<C-e>'] = cmp_action.toggle_completion(),
@@ -125,7 +128,7 @@ return {
 
         lsp.on_attach(function(client, bufnr)
             local opts = { buffer = bufnr, remap = false }
-            lsp.default_keymaps({buffer = bufnr})
+            lsp.default_keymaps({ buffer = bufnr })
             if client.server_capabilities.documentSymbolProvider then
                 navic.attach(client, bufnr)
             end
@@ -146,13 +149,14 @@ return {
 
         require("mason").setup({});
         require("mason-lspconfig").setup({
-            ensure_installed = {'tsserver','svelte', 'lua_ls', 'csharp_ls', "rust_analyzer"},
+            ensure_installed = { 'tsserver', 'svelte', 'lua_ls', 'csharp_ls', 'rust_analyzer' },
             handlers = {
                 lsp.default_setup,
                 lua_ls = function()
                     local lua_opts = lsp.nvim_lua_ls()
                     require('lspconfig').lua_ls.setup(lua_opts)
                 end,
+                rust_analyzer = lsp.noop,
             }
         })
 
@@ -176,5 +180,15 @@ return {
             },
         })
 
+        vim.g.rustaceanvim = {
+            server = {
+                capabilities = lsp.get_capabilities(),
+                on_attach = function()
+                    local bufnr = vim.api.nvim_get_current_buf()
+                    vim.keymap.set("n", "<C-.>", function() vim.cmd.RustLsp('codeAction') end, {silent = true, buffer = bufnr, remap = true})
+                end
+            },
+
+        }
     end
 }
