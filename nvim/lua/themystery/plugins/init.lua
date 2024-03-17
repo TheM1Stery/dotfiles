@@ -8,27 +8,15 @@ return {
         end
     },
     {
-        "nvim-treesitter/nvim-treesitter", build = ":TSUpdate"
-    },
-    {
         "mbbill/undotree",
         config = function()
             vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
         end
     },
     {
-        "lewis6991/gitsigns.nvim",
-        opts = {}
-    },
-    {
-        "windwp/nvim-ts-autotag",
-        event = "InsertEnter",
-        opts = {}
-    },
-    {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
-        opts = {}
+        config = true
     },
     {
         "kosayoda/nvim-lightbulb",
@@ -55,7 +43,8 @@ return {
     },
     {
         "ionide/Ionide-vim",
-        event = "VimEnter"
+        event = "VimEnter",
+        enabled = false
     },
     {
         'ggandor/leap.nvim',
@@ -66,5 +55,4 @@ return {
     },
     "SmiteshP/nvim-navic",
     "Decodetalkers/csharpls-extended-lsp.nvim",
-    "HiPhish/rainbow-delimiters.nvim"
 }

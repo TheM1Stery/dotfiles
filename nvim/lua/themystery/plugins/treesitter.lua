@@ -1,7 +1,11 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        dependencies = { "HiPhish/rainbow-delimiters.nvim" },
+        build = ":TSUpdate",
+        dependencies = {
+            "HiPhish/rainbow-delimiters.nvim",
+            "windwp/nvim-ts-autotag"
+        },
         config = function()
             require 'nvim-treesitter.configs'.setup {
                 -- A list of parser names, or "all"
@@ -29,6 +33,11 @@ return {
                 }
             }
             require('rainbow-delimiters.setup').setup()
+            vim.filetype.add {
+                pattern = {
+                    ['.*/hypr/.*%.conf'] = 'hyprlang'
+                }
+            }
         end
     },
     "nvim-treesitter/nvim-treesitter-context"

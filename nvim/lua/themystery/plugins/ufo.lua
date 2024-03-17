@@ -1,7 +1,8 @@
 return {
     "kevinhwang91/nvim-ufo",
     dependencies = {
-        "kevinhwang91/promise-async"
+        "kevinhwang91/promise-async",
+        'VonHeikemen/lsp-zero.nvim'
     },
     config = function()
         vim.o.foldcolumn = '1' -- '0' is not bad
@@ -15,5 +16,18 @@ return {
         vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
         vim.keymap.set('n', 'zr', require('ufo').openFoldsExceptKinds)
         vim.keymap.set('n', 'zm', require('ufo').closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
+
+        local lsp = require('lsp-zero')
+
+        lsp.set_server_config({
+            capabilities = {
+                textDocument = {
+                    foldingRange = {
+                        dynamicRegistration = false,
+                        lineFoldingOnly = true
+                    }
+                }
+            }
+        })
     end
 }
