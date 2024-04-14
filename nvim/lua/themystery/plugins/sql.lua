@@ -3,7 +3,7 @@ return {
     {
         'kristijanhusak/vim-dadbod-completion',
         ft = sql_ft,
-        requires = { 'kristijanhusak/vim-dadbod', lazy = true},
+        dependencies = { 'kristijanhusak/vim-dadbod', lazy = true},
         lazy = true,
         init = function()
             vim.api.nvim_create_autocmd("FileType", {
