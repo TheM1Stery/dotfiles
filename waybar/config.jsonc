@@ -219,11 +219,11 @@
         "interval": 10
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": " {usage}%",
         "tooltip": true
     },
     "memory": {
-        "format": "{}% "
+        "format": " {}%"
     },
     "tray": {
         // "icon-size": 21,
@@ -289,7 +289,7 @@
     },
     "custom/gpu-usage": {
         "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
-        "format": "{}% G",
+        "format": "G {}%",
         "return-type": "",
         "interval": 3
     },

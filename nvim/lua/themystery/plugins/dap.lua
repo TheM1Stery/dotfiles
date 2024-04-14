@@ -1,6 +1,6 @@
 return {
     "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap" },
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
     config = function()
         -- dap keymaps
         vim.keymap.set("n", "<F5>", "<cmd>lua require'dap'.continue()<CR>")

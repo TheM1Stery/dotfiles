@@ -72,6 +72,6 @@ export PATH="$HOME/go/bin:$PATH"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
+export FP='fzf --preview "bat --style=numbers --color=always --line-range :500 {}"'
 
 
