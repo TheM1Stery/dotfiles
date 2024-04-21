@@ -6,12 +6,14 @@ return {
         dependencies = { 'kristijanhusak/vim-dadbod', lazy = true},
         lazy = true,
         init = function()
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = {
-                    "sql",
-                },
-                command = [[setlocal omnifunc=vim_dadbod_completion#omni]],
-            })
+            -- vim.api.nvim_create_autocmd("FileType", {
+            --     pattern = {
+            --         "sql",
+            --     },
+            --     command = [[setlocal omnifunc=vim_dadbod_completion#omni]],
+            -- })
+
+            -- taken from here https://github.com/kristijanhusak/vim-dadbod-completion/issues/53#issuecomment-1902659351
             local autocomplete_group = vim.api.nvim_create_augroup("vimrc_autocompletion", { clear = true })
             vim.api.nvim_create_autocmd("FileType", {
                 pattern = sql_ft,
@@ -43,8 +45,6 @@ return {
         dependencies =
         {
             { 'tpope/vim-dadbod', lazy = true },
-            -- { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
-            -- {'hrsh7th/nvim-cmp'}
             {'kristijanhusak/vim-dadbod-completion'},
         },
         cmd = {

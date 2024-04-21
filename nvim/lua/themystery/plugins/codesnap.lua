@@ -1,11 +1,11 @@
 return {
     "mistricky/codesnap.nvim",
     config = function()
-        vim.keymap.set("n", "<leader>csv", "<cmd>CodeSnapPreviewOn<CR>")
         require("codesnap").setup({
             mac_window_bar = false,
-            opacity = true,
-            watermark = "TheMystery"
+            watermark = "TheMystery",
+            has_breadcrumbs = true,
+            bg_theme = "grape"
         })
     end,
     build = "make"
