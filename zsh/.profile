@@ -96,13 +96,13 @@ cdf(){
     fi
     if [ -z "$arg" ]; then
         if $hidden; then
-            result="$($FZF_DEFAULT_COMMAND --hidden | fzf)"
+            result="$($FZF_DEFAULT_COMMAND --type d --hidden | fzf)"
             if [ -d "$result" ]; then
                 cd "$result"
             fi
             return 0
         fi
-        result="$(fzf $arg)"
+        result="$(fd . $HOME --type d | fzf)"
         if [ -d "$result" ]; then
             cd "$result"
             return 0
