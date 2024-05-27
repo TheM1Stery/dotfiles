@@ -44,7 +44,6 @@ return {
     {
         "ionide/Ionide-vim",
         event = "VimEnter",
-        enabled = false
     },
     {
         'ggandor/leap.nvim',
@@ -59,5 +58,9 @@ return {
         "lukas-reineke/headlines.nvim",
         dependencies = "nvim-treesitter/nvim-treesitter",
         config = true, -- or `opts = {}`
+    },
+    {
+        "L3MON4D3/LuaSnip",
+        build = "make install_jsregexp"
     }
 }

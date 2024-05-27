@@ -1,4 +1,3 @@
-
 vim.g.mapleader = " "
 -- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
@@ -23,15 +22,15 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- next greatest remap ever : asbjornHaland
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- This is going to get me cancelled
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
-vim.keymap.set({"n", "v", "i"}, "<C-z>", "<nop>")
+vim.keymap.set({ "n", "v", "i" }, "<C-z>", "<nop>")
 vim.keymap.set("n", "Q", "<nop>")
 -- vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
@@ -50,8 +49,15 @@ vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>")
 --delete all buffers except current
 vim.keymap.set("n", "<leader>bda", "<cmd>:%bd|e#<CR>")
 
+-- macro recording remaps
+vim.keymap.set("n", "<leader>q", "qq")
+vim.keymap.set("n", "<leader><leader>", "@q")
+
+-- comments remaps
+vim.keymap.set("v", "<C-/>", "gc", { remap = true });
+vim.keymap.set("n", "<C-/>", "gcc", { remap = true });
+
 
 -- vim.keymap.set("n", "<leader><leader>", function()
 --     vim.cmd("so")
 -- end)
-

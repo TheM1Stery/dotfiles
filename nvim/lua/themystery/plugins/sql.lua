@@ -3,7 +3,7 @@ return {
     {
         'kristijanhusak/vim-dadbod-completion',
         ft = sql_ft,
-        dependencies = { 'kristijanhusak/vim-dadbod', lazy = true},
+        dependencies = { 'tpope/vim-dadbod', lazy = true },
         lazy = true,
         init = function()
             -- vim.api.nvim_create_autocmd("FileType", {
@@ -44,8 +44,8 @@ return {
         'kristijanhusak/vim-dadbod-ui',
         dependencies =
         {
-            { 'tpope/vim-dadbod', lazy = true },
-            {'kristijanhusak/vim-dadbod-completion'},
+            { 'tpope/vim-dadbod',                    lazy = true },
+            { 'kristijanhusak/vim-dadbod-completion' },
         },
         cmd = {
             'DBUI',
