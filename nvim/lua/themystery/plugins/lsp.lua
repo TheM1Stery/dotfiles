@@ -125,6 +125,7 @@ return {
             lsp.on_attach(function(client, bufnr)
                 local opts = { buffer = bufnr, remap = false }
                 lsp.default_keymaps({ buffer = bufnr })
+                vim.lsp.inlay_hint.enable(true)
                 if client.server_capabilities.documentSymbolProvider then
                     navic.attach(client, bufnr)
                 end
