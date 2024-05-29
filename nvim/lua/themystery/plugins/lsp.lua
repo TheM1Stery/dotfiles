@@ -27,6 +27,7 @@ return {
 
             -- extras
             "SmiteshP/nvim-navic",
+            "SmiteshP/nvim-navbuddy",
             "Decodetalkers/csharpls-extended-lsp.nvim",
 
             -- rust
@@ -122,12 +123,15 @@ return {
 
             local navic = require("nvim-navic")
 
+            local navbuddy = require("nvim-navbuddy")
+
             lsp.on_attach(function(client, bufnr)
                 local opts = { buffer = bufnr, remap = false }
                 lsp.default_keymaps({ buffer = bufnr })
                 vim.lsp.inlay_hint.enable(true)
                 if client.server_capabilities.documentSymbolProvider then
                     navic.attach(client, bufnr)
+                    navbuddy.attach(client, bufnr)
                 end
                 vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
                 vim.keymap.set("n", "<leader>dc", function() vim.lsp.buf.hover() end, opts)
@@ -137,11 +141,13 @@ return {
                 vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
                 -- for the code action key map to work you need to change key binding('.' symbol) of your terminal, otherwise it won't work
                 vim.keymap.set("n", "<C-.>", function() vim.lsp.buf.code_action() end, opts)
-                vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
+                vim.keymap.set("n", "<leader>drr", function() vim.lsp.buf.references() end, opts)
                 vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
                 vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
                 -- sometimes lsp fails, we can restart it with this keymap
                 vim.keymap.set('n', "<leader>lr", vim.cmd.LspRestart, opts)
+
+                vim.keymap.set("n", "<leader>nv", function() navbuddy.open() end, opts)
             end)
 
             require("mason").setup({});
@@ -172,7 +178,7 @@ return {
                 float = {
                     style = 'minimal',
                     border = 'rounded',
-                    source = 'always',
+                    source = true,
                     header = '',
                     prefix = '',
                 },
