@@ -154,6 +154,7 @@ return {
                         require('lspconfig').lua_ls.setup(lua_opts)
                     end,
                     rust_analyzer = lsp.noop,
+                    fsautocomplete = lsp.noop,
                 }
             })
 
