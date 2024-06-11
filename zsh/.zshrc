@@ -36,12 +36,13 @@ _dotnet_zsh_complete()
   _values = "${(ps:\n:)completions}"
 }
 
-compdef _dotnet_zsh_complete dotnet
 
 # useful plugins
+source ~/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+
+compdef _dotnet_zsh_complete dotnet
 
 # aws cli completion for zsh
 autoload bashcompinit && bashcompinit

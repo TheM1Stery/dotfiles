@@ -60,6 +60,23 @@ return {
                     }
                 }
             })
+
+            lsp.configure("tailwindcss", {
+                settings = {
+                },
+                filetypes = {
+                    "astro",
+                    "handlebars",
+                    "html",
+                    "javascript",
+                    "javascriptreact",
+                    "svelte",
+                    "typescript",
+                    "typescriptreact",
+                    "rust"
+                },
+                init_options = { userLanguages = { rust = "html" } },
+            })
             --
             -- lsp.configure("rust_analyzer", {
             --     settings = {
@@ -76,19 +93,42 @@ return {
 
             local cmp = require('cmp')
             local cmp_action = lsp.cmp_action()
-            local cmp_format = lsp.cmp_format()
 
             require('luasnip.loaders.from_vscode').lazy_load()
+
+            local tailwindcss_colors = require('tailwindcss-colorizer-cmp')
+
+            local cmp_formatter = function(entry, vim_item)
+                -- vim_item as processed by tailwindcss-colorizer-cmp
+                vim_item = tailwindcss_colors.formatter(entry, vim_item)
+
+                -- change menu (name of source)
+                vim_item.menu = ({
+                    nvim_lsp = "[LSP]",
+                    buffer = "[Buffer]",
+                    path = "[Path]",
+                    emoji = "[Emoji]",
+                    luasnip = "[LuaSnip]",
+                    vsnip = "[VSCode Snippet]",
+                    calc = "[Calc]",
+                    spell = "[Spell]",
+                })[entry.source.name]
+                return vim_item
+            end
 
             vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
             cmp.setup({
-                formatting = cmp_format,
+                formatting = {
+                    fields = { "abbr", "menu", "kind" },
+                    format = cmp_formatter,
+                },
                 preselect = 'item',
                 completion = {
                     completeopt = 'menu,menuone,noinsert'
                 },
                 window = {
+                    completion = cmp.config.window.bordered(),
                     documentation = cmp.config.window.bordered(),
                 },
                 sources = {
