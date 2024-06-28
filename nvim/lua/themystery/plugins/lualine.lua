@@ -36,7 +36,8 @@ return {
                 -- Disable sections and component separators
                 component_separators = '',
                 section_separators = '',
-                globalstatus = true
+                globalstatus = true,
+                theme = 'onenord'
             },
             sections = {
                 -- these are to remove the defaults

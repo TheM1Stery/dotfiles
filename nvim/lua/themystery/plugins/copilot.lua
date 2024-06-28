@@ -5,7 +5,8 @@ return {
         vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
         vim.g.copilot_filetypes = {
             -- because i'm learning rust
-            rust = false
+            rust = false,
+            go = false,
         };
     end
 }

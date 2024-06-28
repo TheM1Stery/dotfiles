@@ -5,6 +5,14 @@ return {
         ft = { 'rust' },
     },
     {
+        "ray-x/go.nvim",
+        dependencies = { -- optional packages
+            "ray-x/guihua.lua",
+        },
+        ft = { "go", 'gomod' },
+        build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+    },
+    {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
         dependencies = {
@@ -30,8 +38,9 @@ return {
             "SmiteshP/nvim-navbuddy",
             "Decodetalkers/csharpls-extended-lsp.nvim",
 
-            -- rust
-            'mrcjkb/rustaceanvim'
+            -- specific language servers
+            'mrcjkb/rustaceanvim',
+            'ray-x/go.nvim',
         },
         config = function()
             local lsp = require("lsp-zero")
@@ -191,6 +200,11 @@ return {
             end)
 
             require("mason").setup({});
+            require("go").setup({
+                lsp_cfg = false
+            })
+
+            local gopls_opts = require("go.lsp").config()
             require("mason-lspconfig").setup({
                 ensure_installed = { 'tsserver', 'svelte', 'lua_ls', 'csharp_ls' },
                 handlers = {
@@ -201,6 +215,9 @@ return {
                     end,
                     rust_analyzer = lsp.noop,
                     fsautocomplete = lsp.noop,
+                    gopls = function()
+                        require('lspconfig').gopls.setup(gopls_opts)
+                    end,
                 }
             })
 
