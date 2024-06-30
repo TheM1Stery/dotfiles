@@ -4,7 +4,6 @@ return {
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-ui-select.nvim",
-        "ThePrimeagen/harpoon",
     },
     config = function()
         local builtin = require('telescope.builtin')
@@ -59,7 +58,5 @@ return {
             }
         }
         require("telescope").load_extension("ui-select")
-        require("telescope").load_extension("harpoon")
-        vim.keymap.set("n", "<leader>pba", ":Telescope harpoon marks<CR>")
     end
 }
