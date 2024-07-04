@@ -50,8 +50,8 @@ vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>")
 vim.keymap.set("n", "<leader>bda", "<cmd>:%bd|e#<CR>")
 
 -- macro recording remaps
-vim.keymap.set("n", "<leader>q", "qq")
-vim.keymap.set("n", "<leader><leader>", "@q")
+-- vim.keymap.set("n", "<leader>q", "qq")
+-- vim.keymap.set("n", "<leader><leader>", "@q")
 
 -- comments remaps
 vim.keymap.set("v", "<C-/>", "gc", { remap = true });
