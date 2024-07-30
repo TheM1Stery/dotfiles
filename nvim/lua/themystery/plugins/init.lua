@@ -54,10 +54,16 @@ return {
     },
     "SmiteshP/nvim-navic",
     "Decodetalkers/csharpls-extended-lsp.nvim",
+    -- {
+    --     "lukas-reineke/headlines.nvim",
+    --     dependencies = "nvim-treesitter/nvim-treesitter",
+    --     config = true, -- or `opts = {}`
+    -- },
     {
-        "lukas-reineke/headlines.nvim",
-        dependencies = "nvim-treesitter/nvim-treesitter",
-        config = true, -- or `opts = {}`
+        'MeanderingProgrammer/markdown.nvim',
+        main = "render-markdown",
+        opts = {},
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
     },
     {
         "L3MON4D3/LuaSnip",
