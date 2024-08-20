@@ -7,6 +7,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Created by newuser for 5.9
+
+
+
 # my alliases are in ~/.profile so this just sources it
 [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
 
@@ -43,6 +46,7 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 compdef _dotnet_zsh_complete dotnet
+source <(fzf --zsh)
 
 # aws cli completion for zsh
 autoload bashcompinit && bashcompinit
@@ -70,8 +74,12 @@ export PATH="$HOME/go/bin:$PATH"
 # bun completions
 [ -s "/home/themystery/.bun/_bun" ] && source "/home/themystery/.bun/_bun"
 
+# opam source
+[[ ! -r /home/themystery/.opam/opam-init/init.zsh ]] || source /home/themystery/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-export FP='fzf --preview "bat --style=numbers --color=always --line-range :500 {}"'
+export FP='fzf --preview="bat --style=numbers --color=always --line-range :500 {}"'
+
 

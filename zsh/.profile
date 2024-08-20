@@ -78,6 +78,7 @@ mkcdir ()
 
 # fzf + fd
 export FZF_DEFAULT_COMMAND="fd . $HOME"
+export FZF_DEFAULT_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
 
 _check_hidden_arg(){
     if [[ "$1" = "--hidden" ]]; then
