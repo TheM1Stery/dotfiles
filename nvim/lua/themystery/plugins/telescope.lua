@@ -14,6 +14,7 @@ return {
         end)
         vim.keymap.set('n', '<leader>pb', builtin.buffers, {})
         vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
+        vim.keymap.set('n', '<leader>pd', builtin.diagnostics, {})
 
 
         local actions = require('telescope.actions')

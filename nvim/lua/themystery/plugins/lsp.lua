@@ -82,9 +82,10 @@ return {
                     "svelte",
                     "typescript",
                     "typescriptreact",
-                    "rust"
+                    "rust",
+                    "templ"
                 },
-                init_options = { userLanguages = { rust = "html" } },
+                init_options = { userLanguages = { rust = "html", templ = "html" } },
             })
             --
             -- lsp.configure("rust_analyzer", {

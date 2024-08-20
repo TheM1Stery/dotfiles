@@ -19,7 +19,7 @@ return {
         formatters_by_ft = {
             lua = { "stylua" },
             python = { "isort", "black" },
-            javascript = { { "prettierd", "prettier" } },
+            javascript = { "prettierd", "prettier", stop_after_first = true },
             rust = { "rustfmt" },
             go = { "gofmt" }
         },
