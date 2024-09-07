@@ -9,6 +9,7 @@ fi
 # Created by newuser for 5.9
 
 
+# zsh settigns
 
 # my alliases are in ~/.profile so this just sources it
 [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
@@ -21,6 +22,9 @@ fpath+=~/.zsh
 export PATH="$PATH:$HOME/.dotnet/tools"
 
 source <(copilot completion zsh)
+
+export HISTSIZE=10000
+export SAVEHIST=10000
 
 
 
@@ -81,5 +85,7 @@ export PATH="$HOME/go/bin:$PATH"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export FP='fzf --preview="bat --style=numbers --color=always --line-range :500 {}"'
+
+
 
 

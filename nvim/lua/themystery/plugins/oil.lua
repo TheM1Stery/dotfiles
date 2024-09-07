@@ -12,6 +12,9 @@ return {
                 win_options = {
                     signcolumn = "yes:2",
                 },
+                keymaps = {
+                    ["<C-p"] = false
+                }
             })
 
             vim.keymap.set("n", "<leader>tf", vim.cmd.Oil);

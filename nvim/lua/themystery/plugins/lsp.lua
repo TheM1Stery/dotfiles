@@ -207,7 +207,7 @@ return {
 
             local gopls_opts = require("go.lsp").config()
             require("mason-lspconfig").setup({
-                ensure_installed = { 'tsserver', 'svelte', 'lua_ls', 'csharp_ls' },
+                ensure_installed = { 'tsserver', 'svelte', 'lua_ls', 'csharp_ls', 'rust_analyzer', 'gopls' },
                 handlers = {
                     lsp.default_setup,
                     lua_ls = function()
