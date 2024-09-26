@@ -30,11 +30,6 @@ return {
                 }
             }
             require('rainbow-delimiters.setup').setup()
-            vim.filetype.add {
-                pattern = {
-                    ['.*/hypr/.*%.conf'] = 'hyprlang'
-                }
-            }
         end
     },
     -- "nvim-treesitter/nvim-treesitter-context"

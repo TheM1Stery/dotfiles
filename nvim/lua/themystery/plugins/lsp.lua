@@ -43,7 +43,21 @@ return {
             'ray-x/go.nvim',
         },
         config = function()
+            -- unknown filetypes(needed for some lsp servers)
+            vim.filetype.add {
+                pattern = {
+                    ['.*/hypr/.*%.conf'] = 'hyprlang',
+                    ['openapi.*%.ya?ml'] = 'yaml.openapi',
+                    ['openapi.*%.json'] = 'json.openapi',
+                }
+            }
+
+
             local lsp = require("lsp-zero")
+
+            lsp.configure('yamlls', {
+                filetypes = { 'yaml', 'yaml.openapi' }
+            })
 
             lsp.configure('csharp_ls', {
                 handlers = {
@@ -207,7 +221,7 @@ return {
 
             local gopls_opts = require("go.lsp").config()
             require("mason-lspconfig").setup({
-                ensure_installed = { 'tsserver', 'svelte', 'lua_ls', 'csharp_ls', 'rust_analyzer', 'gopls' },
+                ensure_installed = { 'ts_ls', 'svelte', 'lua_ls', 'csharp_ls', 'rust_analyzer', 'gopls' },
                 handlers = {
                     lsp.default_setup,
                     lua_ls = function()
