@@ -87,12 +87,24 @@ _check_hidden_arg(){
     return 1
 }
 
+_check_ancestor_arg() {
+    if [[ "$1" = "-a" ]]; then
+        return 0
+    fi
+    return 1
+}
+
 # need to clean this up(TODO)
 cdf(){
     arg=$1
     hidden=false
+    ansector=false
     if _check_hidden_arg "$arg"; then
         hidden=true
+        arg=$2
+    fi
+    if _check_ancestor_arg "$arg"; then
+        ancestor=true
         arg=$2
     fi
     if [ -z "$arg" ]; then
@@ -111,7 +123,10 @@ cdf(){
         echo "Not a directory or empty"
         return 1
     fi
-    fd_command="fd . $arg --type d --max-depth 1"
+    fd_command="fd . $arg --type d"
+    if ! $ancestor; then
+        fd_command="$fd_command --max-depth 1"
+    fi
     if $hidden; then
         fd_command="$fd_command --hidden"
     fi
