@@ -32,6 +32,6 @@ return {
             require('rainbow-delimiters.setup').setup()
         end
     },
-    -- "nvim-treesitter/nvim-treesitter-context"
+    "nvim-treesitter/nvim-treesitter-context"
 
 }

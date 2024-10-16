@@ -20,8 +20,9 @@ return {
             lua = { "stylua" },
             python = { "isort", "black" },
             javascript = { "prettierd", "prettier", stop_after_first = true },
-            rust = { "rustfmt" },
-            go = { "gofmt" }
+            rust = { "rustfmt", "leptosfmt" },
+            go = { "gofmt" },
+            yaml = { "yamlfmt" }
         },
         -- -- Set up format-on-save
         format_on_save = { timeout_ms = 500, lsp_fallback = true },

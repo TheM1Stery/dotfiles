@@ -1,8 +1,9 @@
 return {
     {
         'mrcjkb/rustaceanvim',
-        version = '^4', -- Recommended
+        version = '^5', -- Recommended
         ft = { 'rust' },
+        lazy = false
     },
     {
         "ray-x/go.nvim",

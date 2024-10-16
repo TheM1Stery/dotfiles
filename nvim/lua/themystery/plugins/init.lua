@@ -77,5 +77,6 @@ return {
                 color_square_width = 2,
             })
         end
-    }
+    },
+    "https://github.com/tpope/vim-dotenv"
 }
