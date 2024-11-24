@@ -4,6 +4,7 @@ return {
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-ui-select.nvim",
+        "olimorris/persisted.nvim"
     },
     config = function()
         local builtin = require('telescope.builtin')
@@ -59,5 +60,21 @@ return {
             }
         }
         require("telescope").load_extension("ui-select")
+        require("telescope").load_extension("persisted")
+
+
+        vim.keymap.set("n", '<leader>ops', ":Telescope persisted<CR>")
+
+        -- persisted, remove buffers after switching sessions
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "PersistedTelescopeLoadPre",
+            callback = function(_session)
+                -- Save the currently loaded session using the global variable
+                require("persisted").save({ session = vim.g.persisted_loaded_session })
+
+                -- Delete all of the open buffers
+                vim.api.nvim_input("<ESC>:%bd!<CR>")
+            end,
+        })
     end
 }

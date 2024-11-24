@@ -33,15 +33,6 @@ return {
     },
     "mfussenegger/nvim-dap",
     {
-        "folke/neodev.nvim",
-        dependencies = { "rcarriga/nvim-dap-ui" },
-        config = function()
-            require("neodev").setup({
-                library = { plugins = { "nvim-dap-ui" }, types = true }
-            })
-        end
-    },
-    {
         "ionide/Ionide-vim",
         event = "VimEnter",
     },
@@ -78,5 +69,10 @@ return {
             })
         end
     },
-    "https://github.com/tpope/vim-dotenv"
+    "tpope/vim-dotenv",
+    {
+        "olimorris/persisted.nvim",
+        lazy = false, -- make sure the plugin is always loaded at startup
+        config = true
+    }
 }

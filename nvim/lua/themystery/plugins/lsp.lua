@@ -6,6 +6,27 @@ return {
         lazy = false
     },
     {
+        'saecki/crates.nvim',
+        tag = 'stable',
+        config = function()
+            require('crates').setup({
+                lsp = {
+                    enabled = true,
+                    actions = true,
+                    completion = true,
+                    hover = true
+                }
+            })
+            local opts = { silent = true }
+
+
+            local crates = require("crates")
+
+            vim.keymap.set("n", "<leader>cv", crates.show_versions_popup, opts)
+            vim.keymap.set("n", "<leader>cf", crates.show_features_popup, opts)
+        end,
+    },
+    {
         "ray-x/go.nvim",
         dependencies = { -- optional packages
             "ray-x/guihua.lua",
@@ -162,6 +183,7 @@ return {
                     { name = 'nvim_lua' },
                     { name = 'buffer',  keyword_length = 3 },
                     { name = 'luasnip', keyword_length = 2 },
+                    { name = 'lazydev', group_index = 0 }
                 },
                 mapping = cmp.mapping.preset.insert({
                     -- confirm completion item

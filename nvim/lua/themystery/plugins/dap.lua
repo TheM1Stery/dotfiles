@@ -29,7 +29,7 @@ return {
             port = "${port}",
             executable = {
                 command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
-                args = {"--port", "${port}"}
+                args = { "--port", "${port}" }
             }
         }
 
@@ -46,7 +46,5 @@ return {
         --         showDisassembly = "never"
         --     }
         -- }
-
-
     end
 }
