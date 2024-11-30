@@ -68,7 +68,7 @@ return {
         -- persisted, remove buffers after switching sessions
         vim.api.nvim_create_autocmd("User", {
             pattern = "PersistedTelescopeLoadPre",
-            callback = function(_session)
+            callback = function(session)
                 -- Save the currently loaded session using the global variable
                 require("persisted").save({ session = vim.g.persisted_loaded_session })
 
