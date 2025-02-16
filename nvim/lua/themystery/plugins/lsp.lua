@@ -278,18 +278,6 @@ return {
                     prefix = '',
                 },
             })
-
-            vim.g.rustaceanvim = {
-                server = {
-                    -- capabilities = lsp.get_capabilities(),
-                    on_attach = function()
-                        local bufnr = vim.api.nvim_get_current_buf()
-                        vim.keymap.set("n", "<C-.>", function() vim.cmd.RustLsp('codeAction') end,
-                            { silent = true, buffer = bufnr, remap = true })
-                    end
-                },
-
-            }
         end
     }
 }
