@@ -1,4 +1,4 @@
-return {
+local rust = {
     {
         'mrcjkb/rustaceanvim',
         version = '^5', -- Recommended
@@ -26,6 +26,9 @@ return {
             vim.keymap.set("n", "<leader>cf", crates.show_features_popup, opts)
         end,
     },
+}
+
+local go = {
     {
         "ray-x/go.nvim",
         dependencies = { -- optional packages
@@ -34,6 +37,27 @@ return {
         ft = { "go", 'gomod' },
         build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
     },
+}
+
+local lazydev = {
+    {
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        opts = {
+            library = {
+                -- See the configuration section for more details
+                -- Load luvit types when the `vim.uv` word is found
+                { path = "luvit-meta/library", words = { "vim%.uv" } },
+            },
+        },
+    },
+    { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+}
+
+return {
+    lazydev,
+    rust,
+    go,
     {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
@@ -123,18 +147,6 @@ return {
                 },
                 init_options = { userLanguages = { rust = "html", templ = "html" } },
             })
-            --
-            -- lsp.configure("rust_analyzer", {
-            --     settings = {
-            --         ["rust-analyzer"] = {
-            --             checkOnSave = true,
-            --             check = {
-            --                 command = "clippy"
-            --             }
-            --         }
-            --     }
-            -- })
-
 
 
             local cmp = require('cmp')
@@ -221,6 +233,7 @@ return {
                     navbuddy.attach(client, bufnr)
                 end
                 vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+                vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
                 vim.keymap.set("n", "<leader>dc", function() vim.lsp.buf.hover() end, opts)
                 vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
                 vim.keymap.set("n", "<leader>ed", function() vim.diagnostic.open_float() end, opts)
