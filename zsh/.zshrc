@@ -8,7 +8,6 @@ fi
 
 # Created by newuser for 5.9
 
-
 # zsh settigns
 
 # my alliases are in ~/.profile so this just sources it
@@ -26,8 +25,6 @@ source <(copilot completion zsh)
 export HISTSIZE=10000
 export SAVEHIST=10000
 
-
-
 _dotnet_zsh_complete()
 {
   local completions=("$(dotnet complete "$words")")
@@ -42,7 +39,6 @@ _dotnet_zsh_complete()
   # This is not a variable assignment, don't remove spaces!
   _values = "${(ps:\n:)completions}"
 }
-
 
 # useful plugins
 source ~/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
@@ -85,7 +81,4 @@ export PATH="$HOME/go/bin:$PATH"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export FP='fzf --preview="bat --style=numbers --color=always --line-range :500 {}"'
-
-
-
 

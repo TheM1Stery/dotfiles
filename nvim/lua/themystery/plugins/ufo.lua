@@ -17,17 +17,24 @@ return {
         vim.keymap.set('n', 'zr', require('ufo').openFoldsExceptKinds)
         vim.keymap.set('n', 'zm', require('ufo').closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
 
-        local lsp = require('lsp-zero')
-
-        lsp.set_server_config({
-            capabilities = {
+        local lsp_capabilities = vim.tbl_deep_extend(
+            'force',
+            require('blink.cmp').get_lsp_capabilities(),
+            {
                 textDocument = {
                     foldingRange = {
                         dynamicRegistration = false,
                         lineFoldingOnly = true
-                    }
-                }
+                    },
+                },
             }
-        })
+        )
+
+        local lspconfig_defaults = require('lspconfig').util.default_config
+        lspconfig_defaults.capabilities = vim.tbl_deep_extend(
+            'force',
+            lspconfig_defaults.capabilities,
+            lsp_capabilities
+        )
     end
 }

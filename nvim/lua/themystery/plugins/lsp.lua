@@ -53,25 +53,14 @@ return {
         }
     },
     {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v3.x',
+        'neovim/nvim-lspconfig',
         dependencies = {
-            -- LSP Support
-            'neovim/nvim-lspconfig',
+            -- Mason
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
 
             -- Autocompletion
-            'hrsh7th/nvim-cmp',
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-path',
-            'saadparwaiz1/cmp_luasnip',
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-nvim-lua',
-
-            -- Snippets
-            'L3MON4D3/LuaSnip',
-            'rafamadriz/friendly-snippets',
+            'saghen/blink.cmp',
 
             -- extras
             "SmiteshP/nvim-navic",
@@ -94,83 +83,14 @@ return {
             }
 
 
-            local lsp = require("lsp-zero")
-
-            local cmp = require('cmp')
-            local cmp_action = lsp.cmp_action()
-
-            require('luasnip.loaders.from_vscode').lazy_load()
-
-            local tailwindcss_colors = require('tailwindcss-colorizer-cmp')
-
-            local cmp_formatter = function(entry, vim_item)
-                -- vim_item as processed by tailwindcss-colorizer-cmp
-                vim_item = tailwindcss_colors.formatter(entry, vim_item)
-
-                -- change menu (name of source)
-                vim_item.menu = ({
-                    nvim_lsp = "[LSP]",
-                    buffer = "[Buffer]",
-                    path = "[Path]",
-                    emoji = "[Emoji]",
-                    luasnip = "[LuaSnip]",
-                    vsnip = "[VSCode Snippet]",
-                    calc = "[Calc]",
-                    spell = "[Spell]",
-                })[entry.source.name]
-                return vim_item
-            end
 
             vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
-
-            cmp.setup({
-                formatting = {
-                    fields = { "abbr", "menu", "kind" },
-                    format = cmp_formatter,
-                },
-                preselect = 'item',
-                completion = {
-                    completeopt = 'menu,menuone,noinsert'
-                },
-                window = {
-                    completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(),
-                },
-                sources = {
-                    { name = 'path' },
-                    { name = 'nvim_lsp' },
-                    { name = 'nvim_lua' },
-                    { name = 'buffer',  keyword_length = 3 },
-                    { name = 'luasnip', keyword_length = 2 },
-                    { name = 'lazydev', group_index = 0 }
-                },
-                mapping = cmp.mapping.preset.insert({
-                    -- confirm completion item
-                    ['<CR>'] = cmp.mapping.confirm({ select = false, behavior = cmp.ConfirmBehavior.Insert }),
-                    ['<Tab>'] = cmp.mapping.confirm({ select = false, behavior = cmp.ConfirmBehavior.Replace }),
-
-                    -- toggle completion menu
-                    ['<C-e>'] = cmp_action.toggle_completion(),
-
-                    -- tab complete
-                    -- ['<Tab>'] = cmp_action.tab_complete(),
-                    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-
-                    -- navigate between snippet placeholder
-                    ['<C-d>'] = cmp_action.luasnip_jump_forward(),
-                    ['<C-b>'] = cmp_action.luasnip_jump_backward(),
-
-                    -- scroll documentation window
-                    ['<C-f>'] = cmp.mapping.scroll_docs(5),
-                    ['<C-u>'] = cmp.mapping.scroll_docs(-5),
-                }),
-            })
 
             local lspconfig_defaults = require('lspconfig').util.default_config
             lspconfig_defaults.capabilities = vim.tbl_deep_extend(
                 'force',
                 lspconfig_defaults.capabilities,
-                require('cmp_nvim_lsp').default_capabilities()
+                require('blink.cmp').get_lsp_capabilities()
             )
 
 
@@ -218,10 +138,6 @@ return {
                 function(server_name)
                     require("lspconfig")[server_name].setup {}
                 end,
-                -- lua_ls = function()
-                --     local lua_opts = lsp.nvim_lua_ls()
-                --     require('lspconfig').lua_ls.setup(lua_opts)
-                -- end,
                 rust_analyzer = noop,
                 fsautocomplete = noop,
                 gopls = function()
