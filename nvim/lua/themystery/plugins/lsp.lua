@@ -101,54 +101,6 @@ return {
 
             local lsp = require("lsp-zero")
 
-            lsp.configure('yamlls', {
-                filetypes = { 'yaml', 'yaml.openapi' }
-            })
-
-            lsp.configure('csharp_ls', {
-                handlers = {
-                    ["textDocument/definition"] = require("csharpls_extended").handler,
-                    ["textDocument/typeDefinition"] = require("csharpls_extended").handler
-                }
-            })
-
-            lsp.configure('clangd', {
-                cmd = { 'clangd', '--offset-encoding=utf-16' },
-            })
-            -- this code makes it so that the css language server doesn't complain about tailwindcss classes
-            lsp.configure("cssls", {
-                settings = {
-                    css = {
-                        lint = { unknownAtRules = "ignore" }
-                    },
-                    scss = {
-                        lint = { unknownAtRules = "ignore" }
-                    },
-                    less = {
-                        lint = { unknownAtRules = "ignore" }
-                    }
-                }
-            })
-
-            lsp.configure("tailwindcss", {
-                settings = {
-                },
-                filetypes = {
-                    "astro",
-                    "handlebars",
-                    "html",
-                    "javascript",
-                    "javascriptreact",
-                    "svelte",
-                    "typescript",
-                    "typescriptreact",
-                    "rust",
-                    "templ"
-                },
-                init_options = { userLanguages = { rust = "html", templ = "html" } },
-            })
-
-
             local cmp = require('cmp')
             local cmp_action = lsp.cmp_action()
 
@@ -219,70 +171,139 @@ return {
                 }),
             })
 
+            local lspconfig_defaults = require('lspconfig').util.default_config
+            lspconfig_defaults.capabilities = vim.tbl_deep_extend(
+                'force',
+                lspconfig_defaults.capabilities,
+                require('cmp_nvim_lsp').default_capabilities()
+            )
+
+
 
             local navic = require("nvim-navic")
 
             local navbuddy = require("nvim-navbuddy")
 
-            lsp.on_attach(function(client, bufnr)
-                local opts = { buffer = bufnr, remap = false }
-                lsp.default_keymaps({ buffer = bufnr })
-                vim.lsp.inlay_hint.enable(true)
-                if client.server_capabilities.documentSymbolProvider then
-                    navic.attach(client, bufnr)
-                    navbuddy.attach(client, bufnr)
+            vim.api.nvim_create_autocmd("LspAttach", {
+                callback = function(event)
+                    local opts = { buffer = event.buf, remap = false }
+                    local client = vim.lsp.get_client_by_id(event.data.client_id)
+                    vim.lsp.inlay_hint.enable(true)
+                    if client and client.server_capabilities.documentSymbolProvider then
+                        navic.attach(client, event.buf)
+                        navbuddy.attach(client, event.buf)
+                    end
+                    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+                    vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
+                    vim.keymap.set("n", "<leader>dc", function() vim.lsp.buf.hover() end, opts)
+                    vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
+                    vim.keymap.set("n", "<leader>ed", function() vim.diagnostic.open_float() end, opts)
+                    vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
+                    vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+                    -- for the code action key map to work you need to change key binding('.' symbol) of your terminal, otherwise it won't work
+                    vim.keymap.set("n", "<C-.>", function() vim.lsp.buf.code_action() end, opts)
+                    vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.references() end, opts)
+                    vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
+                    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+                    -- sometimes lsp fails, we can restart it with this keymap
+                    vim.keymap.set('n', "<leader>lr", vim.cmd.LspRestart, opts)
+
+                    vim.keymap.set("n", "<leader>nv", function() navbuddy.open() end, opts)
                 end
-                vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-                vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
-                vim.keymap.set("n", "<leader>dc", function() vim.lsp.buf.hover() end, opts)
-                vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-                vim.keymap.set("n", "<leader>ed", function() vim.diagnostic.open_float() end, opts)
-                vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-                vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-                -- for the code action key map to work you need to change key binding('.' symbol) of your terminal, otherwise it won't work
-                vim.keymap.set("n", "<C-.>", function() vim.lsp.buf.code_action() end, opts)
-                vim.keymap.set("n", "<leader>drr", function() vim.lsp.buf.references() end, opts)
-                vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-                vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-                -- sometimes lsp fails, we can restart it with this keymap
-                vim.keymap.set('n', "<leader>lr", vim.cmd.LspRestart, opts)
+            })
 
-                vim.keymap.set("n", "<leader>nv", function() navbuddy.open() end, opts)
-            end)
-
-            require("mason").setup({});
             require("go").setup({
                 lsp_cfg = false
             })
 
+            local noop = function() end
+
             local gopls_opts = require("go.lsp").config()
+            local handlers = {
+                function(server_name)
+                    require("lspconfig")[server_name].setup {}
+                end,
+                -- lua_ls = function()
+                --     local lua_opts = lsp.nvim_lua_ls()
+                --     require('lspconfig').lua_ls.setup(lua_opts)
+                -- end,
+                rust_analyzer = noop,
+                fsautocomplete = noop,
+                gopls = function()
+                    require('lspconfig').gopls.setup(gopls_opts)
+                end,
+                yamlls = function()
+                    require('lspconfig').yamlls.setup {
+                        filetypes = { 'yaml', 'yaml.openapi' }
+                    }
+                end,
+                csharp_ls = function()
+                    require("lspconfig").csharp_ls.setup {
+                        handlers = {
+                            ["textDocument/definition"] = require("csharpls_extended").handler,
+                            ["textDocument/typeDefinition"] = require("csharpls_extended").handler
+                        }
+                    }
+                end,
+                clangd = function()
+                    require("lspconfig").clangd.setup {
+                        cmd = { 'clangd', '--offset-encoding=utf-16' },
+                    }
+                end,
+                cssls = function()
+                    require("lspconfig").cssls.setup {
+                        settings = {
+                            css = {
+                                lint = { unknownAtRules = "ignore" }
+                            },
+                            scss = {
+                                lint = { unknownAtRules = "ignore" }
+                            },
+                            less = {
+                                lint = { unknownAtRules = "ignore" }
+                            }
+                        }
+                    }
+                end,
+                tailwindcss = function()
+                    require("lspconfig").tailwindcss.setup {
+                        filetypes = {
+                            "astro",
+                            "handlebars",
+                            "html",
+                            "javascript",
+                            "javascriptreact",
+                            "svelte",
+                            "typescript",
+                            "typescriptreact",
+                            "rust",
+                            "templ"
+                        },
+                        init_options = { userLanguages = { rust = "html", templ = "html" } },
+                    }
+                end
+            }
+
+            require("mason").setup();
             require("mason-lspconfig").setup({
                 ensure_installed = { 'ts_ls', 'svelte', 'lua_ls', 'csharp_ls', 'rust_analyzer', 'gopls' },
-                handlers = {
-                    lsp.default_setup,
-                    lua_ls = function()
-                        local lua_opts = lsp.nvim_lua_ls()
-                        require('lspconfig').lua_ls.setup(lua_opts)
-                    end,
-                    rust_analyzer = lsp.noop,
-                    fsautocomplete = lsp.noop,
-                    gopls = function()
-                        require('lspconfig').gopls.setup(gopls_opts)
-                    end,
-                }
+                handlers = handlers,
+                automatic_installation = false
             })
 
-
-            lsp.set_sign_icons({
-                error = '✘',
-                warn = '▲',
-                hint = '⚑',
-                info = ''
-            })
 
             vim.diagnostic.config({
                 virtual_text = false,
                 severity_sort = true,
+                signs = vim.g.have_nerd_font and {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = '✘',
+                        [vim.diagnostic.severity.WARN] = '▲',
+                        [vim.diagnostic.severity.HINT] = '⚑',
+                        [vim.diagnostic.severity.INFO] = ''
+
+                    }
+                } or {},
                 float = {
                     style = 'minimal',
                     border = 'rounded',
