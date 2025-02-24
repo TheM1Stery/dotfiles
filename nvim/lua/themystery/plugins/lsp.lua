@@ -1,4 +1,4 @@
-local rust = {
+return {
     {
         'mrcjkb/rustaceanvim',
         version = '^5', -- Recommended
@@ -26,20 +26,6 @@ local rust = {
             vim.keymap.set("n", "<leader>cf", crates.show_features_popup, opts)
         end,
     },
-}
-
-local go = {
-    {
-        "ray-x/go.nvim",
-        dependencies = { -- optional packages
-            "ray-x/guihua.lua",
-        },
-        ft = { "go", 'gomod' },
-        build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
-    },
-}
-
-local lazydev = {
     {
         "folke/lazydev.nvim",
         ft = "lua", -- only load on lua files
@@ -52,12 +38,20 @@ local lazydev = {
         },
     },
     { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
-}
-
-return {
-    lazydev,
-    rust,
-    go,
+    {
+        "ray-x/go.nvim",
+        dependencies = { -- optional packages
+            "ray-x/guihua.lua",
+        },
+        ft = { "go", 'gomod' },
+        build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+    },
+    {
+        "seblyng/roslyn.nvim",
+        ft = "cs",
+        opts = {
+        }
+    },
     {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
@@ -87,6 +81,7 @@ return {
             -- specific language servers
             'mrcjkb/rustaceanvim',
             'ray-x/go.nvim',
+            'seblyng/roslyn.nvim'
         },
         config = function()
             -- unknown filetypes(needed for some lsp servers)
@@ -237,14 +232,6 @@ return {
                         filetypes = { 'yaml', 'yaml.openapi' }
                     }
                 end,
-                csharp_ls = function()
-                    require("lspconfig").csharp_ls.setup {
-                        handlers = {
-                            ["textDocument/definition"] = require("csharpls_extended").handler,
-                            ["textDocument/typeDefinition"] = require("csharpls_extended").handler
-                        }
-                    }
-                end,
                 clangd = function()
                     require("lspconfig").clangd.setup {
                         cmd = { 'clangd', '--offset-encoding=utf-16' },
@@ -284,9 +271,14 @@ return {
                 end
             }
 
-            require("mason").setup();
+            require("mason").setup({
+                registries = {
+                    'github:mason-org/mason-registry',
+                    'github:Crashdummyy/mason-registry'
+                }
+            });
             require("mason-lspconfig").setup({
-                ensure_installed = { 'ts_ls', 'svelte', 'lua_ls', 'csharp_ls', 'rust_analyzer', 'gopls' },
+                ensure_installed = { 'ts_ls', 'svelte', 'lua_ls', 'rust_analyzer', 'gopls' },
                 handlers = handlers,
                 automatic_installation = false
             })
@@ -295,15 +287,15 @@ return {
             vim.diagnostic.config({
                 virtual_text = false,
                 severity_sort = true,
-                signs = vim.g.have_nerd_font and {
+                signs = {
                     text = {
                         [vim.diagnostic.severity.ERROR] = '✘',
                         [vim.diagnostic.severity.WARN] = '▲',
                         [vim.diagnostic.severity.HINT] = '⚑',
-                        [vim.diagnostic.severity.INFO] = ''
+                        [vim.diagnostic.severity.INFO] = '󰋽'
 
                     }
-                } or {},
+                },
                 float = {
                     style = 'minimal',
                     border = 'rounded',
