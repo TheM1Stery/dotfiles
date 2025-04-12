@@ -1,13 +1,14 @@
 return {
     {
         'mrcjkb/rustaceanvim',
-        version = '^5', -- Recommended
+        version = '^6', -- Recommended
         ft = { 'rust' },
         lazy = false
     },
     {
         'saecki/crates.nvim',
         event = { "BufRead Cargo.toml" },
+        tag = 'stable',
         config = function()
             require('crates').setup({
                 lsp = {

@@ -1,6 +1,6 @@
 return {
     'saghen/blink.cmp',
-    dependencies = { 'rafamadriz/friendly-snippets' },
+    dependencies = { 'rafamadriz/friendly-snippets', 'xzbdmw/colorful-menu.nvim' },
 
     version = '*',
 
@@ -16,7 +16,22 @@ return {
             keymap = { preset = 'super-tab' }
         },
         completion = {
-            menu = { border = 'single' },
+            menu = {
+                border = 'single',
+                draw = {
+                    columns = { { "kind_icon" }, { "label", gap = 1 } },
+                    components = {
+                        label = {
+                            text = function(ctx)
+                                return require("colorful-menu").blink_components_text(ctx)
+                            end,
+                            highlight = function(ctx)
+                                return require("colorful-menu").blink_components_highlight(ctx)
+                            end,
+                        },
+                    },
+                }
+            },
             documentation = { auto_show = true, auto_show_delay_ms = 50, window = { border = 'single' } },
         },
         -- signature = { enabled = true, window = { border = 'single' } },
