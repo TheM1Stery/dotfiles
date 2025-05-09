@@ -1,38 +1,38 @@
 * {
-    border:        none;
+    border: none;
     border-radius: 0;
-    font-family:   "JetBrainsMono NF";
-    font-size:     15px;
+    font-family: "JetBrainsMono NF";
+    font-size: 15px;
     font-weight: 600;
-    box-shadow:    none;
-    text-shadow:   none;
+    box-shadow: none;
+    text-shadow: none;
     transition-duration: 0s;
 }
 
 window#waybar {
     /* color: rgba(53, 185, 171, 1); */
     color: whitesmoke;
-    background-color: rgba(38,40,42, 0.92);
+    background-color: rgba(38, 40, 42, 0.92);
     border-bottom: 2px solid rgba(75, 0, 130, 1);
     border-radius: 100px;
     /* border-top: 2px solid rgba(75, 0, 130, 1); */
 }
 
-window#waybar.bottom{
+window#waybar.bottom {
     background-color: transparent;
     border-bottom: none;
 }
 
-window#waybar.bottom > * > *{
-    background-color: rgba(38,40,42, 0.8);
+window#waybar.bottom>*>* {
+    background-color: rgba(38, 40, 42, 0.8);
     border-radius: 100px;
 }
 
-window#waybar.bottom > * > :nth-child(1){
+window#waybar.bottom>*> :nth-child(1) {
     border: 2px solid #e5c07b;
 }
 
-window#waybar.bottom > * > :nth-child(2){
+window#waybar.bottom>*> :nth-child(2) {
     border: 2px solid #abb2bf;
     padding-right: 10px;
     padding-left: 10px;
@@ -41,7 +41,7 @@ window#waybar.bottom > * > :nth-child(2){
 
 
 
-window#waybar.bottom > * > :nth-child(3){
+window#waybar.bottom>*> :nth-child(3) {
     border: 2px solid #61afef;
 }
 
@@ -51,12 +51,10 @@ window#waybar.solo {
     color: whitesmoke;
 }
 
-#workspaces {
-
-}
+#workspaces {}
 
 #custom-scratchpad {
-    margin: 0px	5px;
+    margin: 0px 5px;
     padding: 0px 5px;
 }
 
@@ -76,9 +74,9 @@ window#waybar.solo {
     /* background-color: rgba(255, 255, 255, 0.4); */
 }
 
-#workspaces button.persistent{
+#workspaces button.persistent {
     /* color: rgba(115, 186, 37, 1); */
-    color:whitesmoke;
+    color: whitesmoke;
 }
 
 #workspaces button.urgent {
@@ -86,12 +84,12 @@ window#waybar.solo {
     color: rgba(255, 210, 4, 1);
 }
 
-#workspaces button:hover{
+#workspaces button:hover {
     background-color: rgba(23, 63, 79, 0.4);
     border-radius: 100px;
 }
 
-#workspaces button.special{
+#workspaces button.special {
     color: blueviolet;
 }
 
@@ -103,17 +101,18 @@ window#waybar.solo {
 #temperature,
 #custom-layout,
 #backlight,
-#custom-zypper
-{
+#custom-zypper,
+#wireplumber {
     margin: 0px 6px 0px 10px;
-   min-width: 30px;
+    min-width: 30px;
 }
 
-#cpu, #memory{
+#cpu,
+#memory {
     margin: 0px 6px 0px 3px;
 }
 
-#language{
+#language {
     margin: 0px 3px 0px 10px;
 }
 
@@ -122,7 +121,7 @@ window#waybar.solo {
 }
 
 #battery.warning {
-   color: rgba(255, 210, 4, 1);
+    color: rgba(255, 210, 4, 1);
 }
 
 #battery.critical {
@@ -134,13 +133,14 @@ window#waybar.solo {
 }
 
 #custom-notification {
-  font-family: "NotoSansMono Nerd Font";
-  margin: 0px 6px 0px 8px;
+    font-family: "NotoSansMono Nerd Font";
+    margin: 0px 6px 0px 8px;
 }
 
-#tray{
+#tray {
     margin-left: 5px;
 }
+
 /* #pulseaudio-slider slider { */
 /*     min-height: 0px; */
 /*     min-width: 0px; */
