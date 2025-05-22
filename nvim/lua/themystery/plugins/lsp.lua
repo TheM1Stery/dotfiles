@@ -132,61 +132,47 @@ return {
                 lsp_cfg = false
             })
 
-            local noop = function() end
 
             local gopls_opts = require("go.lsp").config()
-            local handlers = {
-                function(server_name)
-                    require("lspconfig")[server_name].setup {}
-                end,
-                rust_analyzer = noop,
-                fsautocomplete = noop,
-                gopls = function()
-                    require('lspconfig').gopls.setup(gopls_opts)
-                end,
-                yamlls = function()
-                    require('lspconfig').yamlls.setup {
-                        filetypes = { 'yaml', 'yaml.openapi' }
+            vim.lsp.config("gopls", gopls_opts)
+
+            vim.lsp.config("yamlls", {
+                filetypes = { 'yaml', 'yaml.openapi' }
+            })
+
+            vim.lsp.config("clangd", {
+                cmd = { 'clangd', '--offset-encoding=utf-16' },
+            })
+
+            vim.lsp.config("cssls", {
+                settings = {
+                    css = {
+                        lint = { unknownAtRules = "ignore" }
+                    },
+                    scss = {
+                        lint = { unknownAtRules = "ignore" }
+                    },
+                    less = {
+                        lint = { unknownAtRules = "ignore" }
                     }
-                end,
-                clangd = function()
-                    require("lspconfig").clangd.setup {
-                        cmd = { 'clangd', '--offset-encoding=utf-16' },
-                    }
-                end,
-                cssls = function()
-                    require("lspconfig").cssls.setup {
-                        settings = {
-                            css = {
-                                lint = { unknownAtRules = "ignore" }
-                            },
-                            scss = {
-                                lint = { unknownAtRules = "ignore" }
-                            },
-                            less = {
-                                lint = { unknownAtRules = "ignore" }
-                            }
-                        }
-                    }
-                end,
-                tailwindcss = function()
-                    require("lspconfig").tailwindcss.setup {
-                        filetypes = {
-                            "astro",
-                            "handlebars",
-                            "html",
-                            "javascript",
-                            "javascriptreact",
-                            "svelte",
-                            "typescript",
-                            "typescriptreact",
-                            "rust",
-                            "templ"
-                        },
-                        init_options = { userLanguages = { rust = "html", templ = "html" } },
-                    }
-                end
-            }
+                }
+            })
+
+            vim.lsp.config("tailwindcss", {
+                filetypes = {
+                    "astro",
+                    "handlebars",
+                    "html",
+                    "javascript",
+                    "javascriptreact",
+                    "svelte",
+                    "typescript",
+                    "typescriptreact",
+                    "rust",
+                    "templ"
+                },
+                init_options = { userLanguages = { rust = "html", templ = "html" } },
+            })
 
             require("mason").setup({
                 registries = {
@@ -196,9 +182,12 @@ return {
             });
             require("mason-lspconfig").setup({
                 ensure_installed = { 'ts_ls', 'svelte', 'lua_ls', 'rust_analyzer', 'gopls' },
-                handlers = handlers,
-                automatic_installation = false
+                automatic_installation = false,
+                automatic_enable = {
+                    exclude = { "rust_analyzer", "fsautocomplete" }
+                }
             })
+
 
 
             vim.diagnostic.config({
