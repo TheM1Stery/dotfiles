@@ -13,7 +13,8 @@ return {
         -- See the full "keymap" documentation for information on defining your own keymap.
         keymap = { preset = 'super-tab', ['<CR>'] = { 'accept', 'fallback' } },
         cmdline = {
-            keymap = { preset = 'super-tab' }
+            keymap = { preset = 'super-tab' },
+            completion = { menu = { auto_show = true } }
         },
         completion = {
             menu = {
