@@ -174,6 +174,10 @@ return {
                 init_options = { userLanguages = { rust = "html", templ = "html" } },
             })
 
+            vim.lsp.config("gdscript", {
+                cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
+            })
+
             require("mason").setup({
                 registries = {
                     'github:mason-org/mason-registry',
@@ -187,6 +191,7 @@ return {
                     exclude = { "rust_analyzer", "fsautocomplete" }
                 }
             })
+            vim.lsp.enable("gdscript")
 
 
 
