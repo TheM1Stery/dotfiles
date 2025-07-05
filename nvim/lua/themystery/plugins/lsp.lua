@@ -100,11 +100,29 @@ return {
 
             local navbuddy = require("nvim-navbuddy")
 
+            -- stole this from kickstart.nvim
+            local function client_supports_method(client, method, bufnr)
+                if vim.fn.has 'nvim-0.11' == 1 then
+                    return client:supports_method(method, bufnr)
+                else
+                    return client.supports_method(method, { bufnr = bufnr })
+                end
+            end
+
+            local map = function(keys, func, desc, mode, event)
+                mode = mode or 'n'
+                vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+            end
+
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(event)
                     local opts = { buffer = event.buf, remap = false }
                     local client = vim.lsp.get_client_by_id(event.data.client_id)
-                    vim.lsp.inlay_hint.enable(true)
+                    if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
+                        map('<leader>th', function()
+                            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
+                        end, '[T]oggle Inlay [H]ints', nil, event)
+                    end
                     if client and client.server_capabilities.documentSymbolProvider then
                         navic.attach(client, event.buf)
                         navbuddy.attach(client, event.buf)
