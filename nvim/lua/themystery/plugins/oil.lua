@@ -19,12 +19,12 @@ return {
         end
     },
     {
-        "refractalize/oil-git-status.nvim",
-
-        dependencies = {
-            "stevearc/oil.nvim",
-        },
-
-        config = true,
+        "benomahony/oil-git.nvim",
+        dependencies = { "stevearc/oil.nvim" },
     },
+    {
+        "JezerM/oil-lsp-diagnostics.nvim",
+        dependencies = { "stevearc/oil.nvim" },
+        opts = {}
+    }
 }
