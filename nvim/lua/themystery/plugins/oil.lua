@@ -9,11 +9,8 @@ return {
                 view_options = {
                     show_hidden = true,
                 },
-                win_options = {
-                    signcolumn = "yes:2",
-                },
                 keymaps = {
-                    ["<C-p"] = false
+                    ["<C-p>"] = false
                 }
             })
 
