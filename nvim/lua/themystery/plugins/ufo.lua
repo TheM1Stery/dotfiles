@@ -2,7 +2,7 @@ return {
     "kevinhwang91/nvim-ufo",
     dependencies = {
         "kevinhwang91/promise-async",
-        'VonHeikemen/lsp-zero.nvim'
+        'neovim/nvim-lspconfig'
     },
     config = function()
         vim.o.foldcolumn = '1' -- '0' is not bad
