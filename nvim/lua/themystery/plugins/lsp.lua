@@ -54,6 +54,12 @@ return {
         }
     },
     {
+        -- cool plugin
+        "chrisgrieser/nvim-lsp-endhints",
+        event = "LspAttach",
+        opts = {}, -- required, even if empty
+    },
+    {
         'neovim/nvim-lspconfig',
         dependencies = {
             -- Mason
