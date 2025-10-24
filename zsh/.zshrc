@@ -48,9 +48,12 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 compdef _dotnet_zsh_complete dotnet
 source <(fzf --zsh)
 
-# aws cli completion for zsh
 autoload bashcompinit && bashcompinit
+# aws cli completion for zsh
 complete -C '/usr/local/bin/aws_completer' aws
+# opentofu & terraform
+complete -o nospace -C /usr/bin/tofu tofu
+complete -o nospace -C /home/themystery/.local/bin/terraform terraform
 eval "$(register-python-argcomplete pipx)"
 
 # pnpm

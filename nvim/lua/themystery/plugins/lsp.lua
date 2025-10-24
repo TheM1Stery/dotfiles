@@ -86,6 +86,7 @@ return {
                     ['.*/hypr/.*%.conf'] = 'hyprlang',
                     ['openapi.*%.ya?ml'] = 'yaml.openapi',
                     ['openapi.*%.json'] = 'json.openapi',
+                    ['%.gitlab%-ci%.ya?ml'] = 'yaml.gitlab',
                 }
             }
 
@@ -161,11 +162,16 @@ return {
             vim.lsp.config("gopls", gopls_opts)
 
             vim.lsp.config("yamlls", {
-                filetypes = { 'yaml', 'yaml.openapi' }
+                settings = {
+                    yaml = {
+                        customTags = { "!reference sequence" }
+                    }
+                }
             })
 
             vim.lsp.config("clangd", {
                 cmd = { 'clangd', '--offset-encoding=utf-16' },
+                filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }, -- exclude "proto".
             })
 
             vim.lsp.config("cssls", {

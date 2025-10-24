@@ -37,7 +37,8 @@ return {
         "lewis6991/gitsigns.nvim",
         config = function()
             -- TODOS: Add keybindings
-            require("gitsigns").setup()
+            require("gitsigns").setup({})
+            vim.keymap.set("n", "<leader>gb", "<cmd>Gitsigns blame_line<cr>")
         end
     },
     {

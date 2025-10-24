@@ -19,10 +19,10 @@ return {
         formatters_by_ft = {
             lua = { "stylua" },
             python = { "isort", "black" },
-            javascript = { "prettierd", "prettier", stop_after_first = true },
+            -- javascript = { "prettierd", "prettier", stop_after_first = true },
             rust = { "rustfmt", "leptosfmt" },
             go = { "gofmt" },
-            yaml = { "yamlfmt" }
+            -- yaml = { "yamlfmt" },
         },
         -- -- Set up format-on-save
         format_on_save = { timeout_ms = 500, lsp_fallback = true },
@@ -31,6 +31,12 @@ return {
             shfmt = {
                 prepend_args = { "-i", "2" },
             },
+            yamlfmt = {
+                formatter = {
+                    trim_trailing_whitespace = true,
+                    scan_folded_as_literal = true
+                },
+            }
         },
     },
     init = function()
