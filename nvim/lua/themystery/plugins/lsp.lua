@@ -41,6 +41,7 @@ return {
     { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
     {
         "ray-x/go.nvim",
+        branch = "treesitter-main",
         dependencies = { -- optional packages
             "ray-x/guihua.lua",
             "neovim/nvim-lspconfig",
@@ -76,6 +77,14 @@ return {
         opts = {}, -- required, even if empty
     },
     {
+        'oribarilan/lensline.nvim',
+        tag = '2.0.0', -- or: branch = 'release/2.x' for latest non-breaking updates
+        event = 'LspAttach',
+        config = function()
+            require("lensline").setup()
+        end,
+    },
+    {
         'neovim/nvim-lspconfig',
         dependencies = {
             -- Mason
@@ -91,9 +100,9 @@ return {
             "Decodetalkers/csharpls-extended-lsp.nvim",
 
             -- specific language servers
-            'mrcjkb/rustaceanvim',
-            'ray-x/go.nvim',
-            'seblyng/roslyn.nvim'
+            -- 'mrcjkb/rustaceanvim',
+            -- 'ray-x/go.nvim',
+            -- 'seblyng/roslyn.nvim'
         },
         config = function()
             -- unknown filetypes(needed for some lsp servers)

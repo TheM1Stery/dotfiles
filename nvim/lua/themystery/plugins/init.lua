@@ -53,5 +53,11 @@ return {
         "olimorris/persisted.nvim",
         lazy = false, -- make sure the plugin is always loaded at startup
         config = true
+    },
+    {
+        "folke/ts-comments.nvim",
+        opts = {},
+        event = "VeryLazy",
+        enabled = vim.fn.has("nvim-0.10.0") == 1,
     }
 }
