@@ -6,7 +6,7 @@ return {
         build = ":TSUpdate",
         --@class TSConfig
         opts = {
-            ensure_installed = { "vimdoc", "javascript", "typescript", "c", "lua", "rust", "c_sharp" }
+            ensure_installed = { "vimdoc", "javascript", "typescript", "c", "lua", "rust", "c_sharp", "go" }
         },
         config = function(_, opts)
             -- this config was taken
@@ -23,7 +23,9 @@ return {
             end
             -- install parsers from opts.ensure_installed
             if opts.ensure_installed and #opts.ensure_installed > 0 then
-                require("nvim-treesitter").install(opts.ensure_installed)
+                require("nvim-treesitter").install(opts.ensure_installed):await(function()
+                    vim.notify("Installed treesitter parsers from the ensure_installed opts...", vim.log.levels.INFO)
+                end)
             end
 
             local nvim_ts = require("nvim-treesitter")
