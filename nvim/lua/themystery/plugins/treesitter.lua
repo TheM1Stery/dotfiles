@@ -23,9 +23,7 @@ return {
             end
             -- install parsers from opts.ensure_installed
             if opts.ensure_installed and #opts.ensure_installed > 0 then
-                require("nvim-treesitter").install(opts.ensure_installed):await(function()
-                    vim.notify("Installed treesitter parsers from the ensure_installed opts...", vim.log.levels.INFO)
-                end)
+                require("nvim-treesitter").install(opts.ensure_installed):wait(30000)
             end
 
             local nvim_ts = require("nvim-treesitter")
