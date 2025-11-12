@@ -26,10 +26,6 @@ return {
     },
     "mfussenegger/nvim-dap",
     {
-        "ionide/Ionide-vim",
-        event = "VimEnter",
-    },
-    {
         'ggandor/leap.nvim',
         dependencies = { 'tpope/vim-repeat' },
         config = function()

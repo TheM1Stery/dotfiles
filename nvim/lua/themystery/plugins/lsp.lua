@@ -1,5 +1,9 @@
 return {
     {
+        "ionide/Ionide-vim",
+        ft = { "fsharp" }
+    },
+    {
         'mrcjkb/rustaceanvim',
         version = '^6', -- Recommended
         ft = { 'rust' },
