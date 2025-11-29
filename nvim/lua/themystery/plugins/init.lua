@@ -29,7 +29,9 @@ return {
         'ggandor/leap.nvim',
         dependencies = { 'tpope/vim-repeat' },
         config = function()
-            require('leap').create_default_mappings()
+            vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap-forward)')
+            vim.keymap.set({ 'n', 'x', 'o' }, 'S', '<Plug>(leap-backward)')
+            vim.keymap.set('n', 'gs', '<Plug>(leap-from-window)')
         end
     },
     "SmiteshP/nvim-navic",
@@ -55,5 +57,11 @@ return {
         opts = {},
         event = "VeryLazy",
         enabled = vim.fn.has("nvim-0.10.0") == 1,
-    }
+    },
+    {
+        'stevearc/overseer.nvim',
+        ---@module 'overseer'
+        ---@type overseer.SetupOpts
+        opts = {},
+    },
 }

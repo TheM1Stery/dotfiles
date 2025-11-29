@@ -37,7 +37,7 @@ return {
                 component_separators = '',
                 section_separators = '',
                 globalstatus = true,
-                theme = 'onenord'
+                theme = 'zen'
             },
             sections = {
                 -- these are to remove the defaults

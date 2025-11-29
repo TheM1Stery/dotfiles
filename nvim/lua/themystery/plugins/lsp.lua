@@ -52,6 +52,7 @@ return {
             "nvim-treesitter/nvim-treesitter",
         },
         opts = {
+            dap_debug_keymap = false
         },
         config = function(lp, opts)
             require("go").setup(opts)
@@ -80,14 +81,6 @@ return {
         event = "LspAttach",
         opts = {}, -- required, even if empty
     },
-    -- {
-    --     'oribarilan/lensline.nvim',
-    --     tag = '2.0.0', -- or: branch = 'release/2.x' for latest non-breaking updates
-    --     event = 'LspAttach',
-    --     config = function()
-    --         require("lensline").setup()
-    --     end,
-    -- },
     {
         'neovim/nvim-lspconfig',
         dependencies = {
@@ -100,8 +93,7 @@ return {
 
             -- extras
             "SmiteshP/nvim-navic",
-            "SmiteshP/nvim-navbuddy",
-            "Decodetalkers/csharpls-extended-lsp.nvim",
+            -- "Decodetalkers/csharpls-extended-lsp.nvim",
 
             -- specific language servers
             -- 'mrcjkb/rustaceanvim',
@@ -134,7 +126,7 @@ return {
 
             local navic = require("nvim-navic")
 
-            local navbuddy = require("nvim-navbuddy")
+            -- local navbuddy = require("nvim-navbuddy")
 
             -- stole this from kickstart.nvim
             local function client_supports_method(client, method, bufnr)
@@ -161,7 +153,6 @@ return {
                     end
                     if client and client.server_capabilities.documentSymbolProvider then
                         navic.attach(client, event.buf)
-                        navbuddy.attach(client, event.buf)
                     end
                     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
                     vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
@@ -178,7 +169,7 @@ return {
                     -- sometimes lsp fails, we can restart it with this keymap
                     vim.keymap.set('n', "<leader>lr", vim.cmd.LspRestart, opts)
 
-                    vim.keymap.set("n", "<leader>nv", function() navbuddy.open() end, opts)
+                    -- vim.keymap.set("n", "<leader>nv", function() navbuddy.open() end, opts)
                 end
             })
 

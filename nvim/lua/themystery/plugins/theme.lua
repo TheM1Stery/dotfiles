@@ -17,11 +17,24 @@
 --         vim.cmd([[ colorscheme neofusion ]])
 --     end,
 -- }
+-- return {
+--     "rmehri01/onenord.nvim",
+--     dependencies = { "lukas-reineke/indent-blankline.nvim" },
+--     priority = 1000,
+--     config = function()
+--         require('onenord').setup()
+--     end
+-- }
+
 return {
-    "rmehri01/onenord.nvim",
-    dependencies = { "lukas-reineke/indent-blankline.nvim" },
+    "nendix/zen.nvim",
+    lazy = false,
     priority = 1000,
     config = function()
-        require('onenord').setup()
+        require("zen").setup({
+            transparent = true,
+            terminalColors = true
+        })
+        vim.cmd.colorscheme("zen")
     end
 }

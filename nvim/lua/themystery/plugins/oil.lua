@@ -10,7 +10,11 @@ return {
                     show_hidden = true,
                 },
                 keymaps = {
-                    ["<C-p>"] = false
+                    ["<C-p>"] = false,
+                    ["<C-m>"] = "actions.preview"
+                },
+                float = {
+                    border = "rounded"
                 }
             })
 
