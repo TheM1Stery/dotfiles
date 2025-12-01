@@ -34,7 +34,6 @@ return {
             vim.keymap.set('n', 'gs', '<Plug>(leap-from-window)')
         end
     },
-    "SmiteshP/nvim-navic",
     "Decodetalkers/csharpls-extended-lsp.nvim",
     {
         'MeanderingProgrammer/markdown.nvim',

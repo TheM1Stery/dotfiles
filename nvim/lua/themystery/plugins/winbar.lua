@@ -1,17 +1,3 @@
--- return {
---     "utilyre/barbecue.nvim",
---     name = "barbecue",
---     enabled = false,
---     version = "*",
---     dependencies = {
---         "SmiteshP/nvim-navic",
---         "nvim-tree/nvim-web-devicons", -- optional dependency
---     },
---     opts = {
---         attach_navic = false
---     },
--- }
-
 return {
     'Bekaboo/dropbar.nvim',
     -- optional, but required for fuzzy finder support

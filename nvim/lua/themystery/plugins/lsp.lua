@@ -90,15 +90,6 @@ return {
 
             -- Autocompletion
             'saghen/blink.cmp',
-
-            -- extras
-            "SmiteshP/nvim-navic",
-            -- "Decodetalkers/csharpls-extended-lsp.nvim",
-
-            -- specific language servers
-            -- 'mrcjkb/rustaceanvim',
-            -- 'ray-x/go.nvim',
-            -- 'seblyng/roslyn.nvim'
         },
         config = function()
             -- unknown filetypes(needed for some lsp servers)
@@ -124,10 +115,6 @@ return {
 
 
 
-            local navic = require("nvim-navic")
-
-            -- local navbuddy = require("nvim-navbuddy")
-
             -- stole this from kickstart.nvim
             local function client_supports_method(client, method, bufnr)
                 if vim.fn.has 'nvim-0.11' == 1 then
@@ -151,9 +138,9 @@ return {
                             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
                         end, '[T]oggle Inlay [H]ints', nil, event)
                     end
-                    if client and client.server_capabilities.documentSymbolProvider then
-                        navic.attach(client, event.buf)
-                    end
+                    -- if client and client.server_capabilities.documentSymbolProvider then
+                    --     navic.attach(client, event.buf)
+                    -- end
                     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
                     vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
                     vim.keymap.set("n", "<leader>dc", function() vim.lsp.buf.hover() end, opts)

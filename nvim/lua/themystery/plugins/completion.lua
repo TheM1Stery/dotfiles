@@ -33,6 +33,11 @@ return {
                     },
                 }
             },
+            accept = {
+                auto_brackets = {
+                    enabled = true
+                }
+            },
             documentation = { auto_show = true, auto_show_delay_ms = 50, window = { border = 'single' } },
         },
         -- signature = { enabled = true, window = { border = 'single' } },
