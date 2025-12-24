@@ -45,7 +45,6 @@ return {
     { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
     {
         "ray-x/go.nvim",
-        branch = "treesitter-main",
         dependencies = { -- optional packages
             "ray-x/guihua.lua",
             "neovim/nvim-lspconfig",

@@ -65,8 +65,6 @@ alias zdup="sudo zypper dup"
 alias zrn="sudo zypper ps -s"
 alias zve="sudo zypper ve"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 export SUDO_EDITOR="nvim"
 export EDITOR="nvim"

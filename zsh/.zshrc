@@ -16,6 +16,15 @@ fi
 # enable vi mode
 bindkey -v
 
+# yank to system clipboard
+function vi-yank-xclip {
+   zle vi-yank
+   echo "$CUTBUFFER" | wl-copy
+}
+
+zle -N vi-yank-xclip
+bindkey -M vicmd 'y' vi-yank-xclip
+
 fpath+=~/.zsh
 
 export PATH="$PATH:$HOME/.dotnet/tools"
@@ -64,6 +73,8 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+eval "$(fnm env --use-on-cd --shell zsh)"
+
 # add Pulumi to the PATH
 export PATH=$PATH:$HOME/.pulumi/bin
 export PATH=$PATH:/home/themystery/.spicetify
@@ -84,3 +95,8 @@ export PATH="$HOME/go/bin:$PATH"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="$HOME/neovim/bin:$PATH"
+
+
+
+# andersen SISU
+eval "$(/home/themystery/andersen/SISU/sisu/alz/bin/workspace init -)"

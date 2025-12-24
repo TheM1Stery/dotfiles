@@ -22,13 +22,13 @@ return {
             vim.keymap.set("n", "<leader>tt", require("oil").toggle_float);
         end
     },
-    {
-        "benomahony/oil-git.nvim",
-        dependencies = { "stevearc/oil.nvim" },
-    },
-    {
-        "JezerM/oil-lsp-diagnostics.nvim",
-        dependencies = { "stevearc/oil.nvim" },
-        opts = {}
-    }
+    -- {
+    --     "benomahony/oil-git.nvim",
+    --     dependencies = { "stevearc/oil.nvim" },
+    -- },
+    -- {
+    --     "JezerM/oil-lsp-diagnostics.nvim",
+    --     dependencies = { "stevearc/oil.nvim" },
+    --     opts = {}
+    -- }
 }

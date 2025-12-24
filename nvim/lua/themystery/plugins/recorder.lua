@@ -3,7 +3,7 @@ return {
     dependencies = "rcarriga/nvim-notify", -- optional
     opts = {
         mapping = {
-            startStopRecording = "<leader>q",
+            startStopRecording = "<leader>Q",
             playMacro = "Q",
             switchSlot = "<C-q>",
             editMacro = "cq",

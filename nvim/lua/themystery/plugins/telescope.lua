@@ -14,6 +14,7 @@ return {
             local builtin = require('telescope.builtin')
             vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
             vim.keymap.set('n', '<C-p>', builtin.git_files, {})
+            vim.keymap.set('n', '<leader>pg', builtin.git_status, {})
             vim.keymap.set('n', '<leader>ps', function()
                 builtin.grep_string({ search = vim.fn.input("Grep > ") })
             end)
@@ -41,17 +42,7 @@ return {
                     },
                 },
                 pickers = {
-                    find_files = {
-                        theme = "dropdown"
-                    },
-                    git_files = {
-                        theme = "dropdown"
-                    },
-                    grep_string = {
-                        theme = "dropdown"
-                    },
                     buffers = {
-                        theme = "dropdown",
                         mappings = {
                             n = {
                                 ['<C-d>'] = actions.delete_buffer
